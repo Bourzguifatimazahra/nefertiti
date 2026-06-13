@@ -7,23 +7,33 @@ import path from "path";
 export default defineConfig({
   plugins: [
     tanstackStart({
-      server: { entry: "server" },
       router: {
-        // Enable route generation to auto-generate the route tree
         enableRouteGeneration: true,
       },
     }),
     tailwindcss(),
     react(),
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
   server: {
     hmr: {
       overlay: false,
     },
+  },
+
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+    emptyOutDir: true,
+  },
+
+  preview: {
+    port: 4173,
   },
 });
