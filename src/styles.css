@@ -1,0 +1,250 @@
+/* ALL @import statements MUST be TOGETHER at the VERY TOP */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;500;600;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* THEN Tailwind directives */
+@custom-variant dark (&:is(.dark *));
+@custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand tokens — Nefertiti Aesthetic Clinic */
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-walnut: var(--walnut);
+  --color-charbon: var(--charbon);
+  --color-blanc: var(--blanc);
+  --color-blanc-warm: var(--blanc-warm);
+  --color-medical-gray: var(--medical-gray);
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --ease-signature: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Brand palette */
+  --gold: oklch(0.685 0.07 50); /* #B8896A rose gold */
+  --gold-light: oklch(0.815 0.055 55); /* #D6B49A */
+  --walnut: oklch(0.51 0.055 55); /* #8A6B4F */
+  --charbon: oklch(0.21 0.005 50); /* #1C1C1C */
+  --blanc: oklch(0.975 0.005 75); /* #F9F7F5 */
+  --blanc-warm: oklch(0.955 0.008 70); /* #F2F0ED */
+  --medical-gray: oklch(0.62 0.005 60); /* #8A8A8A */
+
+  /* Shadcn semantic mapping */
+  --background: var(--blanc);
+  --foreground: var(--charbon);
+  --card: var(--blanc);
+  --card-foreground: var(--charbon);
+  --popover: var(--blanc);
+  --popover-foreground: var(--charbon);
+  --primary: var(--charbon);
+  --primary-foreground: var(--blanc);
+  --secondary: var(--blanc-warm);
+  --secondary-foreground: var(--charbon);
+  --muted: var(--blanc-warm);
+  --muted-foreground: var(--medical-gray);
+  --accent: var(--gold);
+  --accent-foreground: var(--blanc);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: var(--blanc);
+  --border: oklch(0.21 0.005 50 / 0.08);
+  --input: oklch(0.21 0.005 50 / 0.12);
+  --ring: var(--gold);
+}
+
+.dark {
+  --blanc: oklch(0.18 0.005 50);
+  --blanc-warm: oklch(0.22 0.006 55);
+  --charbon: oklch(0.97 0.005 75);
+  --medical-gray: oklch(0.72 0.006 60);
+
+  --background: var(--blanc);
+  --foreground: var(--charbon);
+  --card: var(--blanc-warm);
+  --card-foreground: var(--charbon);
+  --popover: var(--blanc-warm);
+  --popover-foreground: var(--charbon);
+  --primary: var(--gold);
+  --primary-foreground: oklch(0.18 0.005 50);
+  --secondary: var(--blanc-warm);
+  --secondary-foreground: var(--charbon);
+  --muted: var(--blanc-warm);
+  --muted-foreground: var(--medical-gray);
+  --border: oklch(0.97 0.005 75 / 0.1);
+  --input: oklch(0.97 0.005 75 / 0.15);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============== Loading Screen ============== */
+.loading-screen {
+  background: radial-gradient(ellipse at center, var(--blanc) 0%, oklch(0.95 0.005 75) 100%);
+}
+
+.loading-bg {
+  background: radial-gradient(ellipse at center, var(--blanc) 0%, oklch(0.94 0.006 70) 100%);
+}
+
+.loading-particle {
+  box-shadow: 0 0 4px rgba(184, 137, 106, 0.3);
+}
+
+.loading-logo-wrapper {
+  filter: drop-shadow(0 4px 20px rgba(184, 137, 106, 0.15));
+}
+
+.loading-divider {
+  max-width: 140px;
+}
+
+.loading-tagline {
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.loading-signature {
+  letter-spacing: 0.4em;
+}
+
+.loading-progress-track {
+  backdrop-filter: blur(4px);
+}
+
+@keyframes logo-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px rgba(184, 137, 106, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px rgba(184, 137, 106, 0.35));
+  }
+}
+
+.loading-logo {
+  animation: logo-glow 2.5s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s var(--ease-signature) both;
+}
+
+.line-draw {
+  position: relative;
+}
+.line-draw::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.6s var(--ease-signature);
+}
+.line-draw:hover::after {
+  width: 100%;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: oklch(0.685 0.07 50 / 0.25);
+  }
+
+  /* ============== Arabic / RTL global rules ============== */
+  [dir="rtl"] {
+    font-family: "Cairo", "Tajawal", "Inter", sans-serif;
+  }
+  [dir="rtl"] .font-display {
+    font-family: "Amiri", "Cormorant Garamond", serif;
+    letter-spacing: 0;
+  }
+  [dir="rtl"] .font-mono {
+    letter-spacing: 0.1em !important;
+  }
+  /* Mirror text alignment for RTL */
+  [dir="rtl"] .text-left {
+    text-align: right;
+  }
+  [dir="rtl"] .text-right {
+    text-align: left;
+  }
+  /* Form fields & inputs */
+  [dir="rtl"] input,
+  [dir="rtl"] textarea,
+  [dir="rtl"] select {
+    text-align: right;
+    direction: rtl;
+  }
+  [dir="rtl"] input[type="email"],
+  [dir="rtl"] input[type="tel"],
+  [dir="rtl"] input[type="url"] {
+    text-align: left;
+    direction: ltr;
+  }
+  /* Mirror borders that act as dividers */
+  [dir="rtl"] .border-l {
+    border-left: 0;
+    border-right-width: 1px;
+  }
+  [dir="rtl"] .border-l-4 {
+    border-left: 0;
+    border-right-width: 4px;
+  }
+  /* Flip arrows in CTAs */
+  [dir="rtl"] .rtl-flip {
+    display: inline-block;
+    transform: scaleX(-1);
+  }
+}

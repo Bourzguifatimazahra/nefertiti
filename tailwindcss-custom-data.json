@@ -1,0 +1,75 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@custom-variant",
+      "description": "Define a custom variant for Tailwind CSS",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/custom-variants"
+        }
+      ]
+    },
+    {
+      "name": "@theme",
+      "description": "Define custom theme values for Tailwind CSS",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/theme"
+        }
+      ]
+    },
+    {
+      "name": "@theme inline",
+      "description": "Define inline theme values for Tailwind CSS",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/theme"
+        }
+      ]
+    },
+    {
+      "name": "@layer",
+      "description": "Add styles to a specific layer in Tailwind CSS",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#layer"
+        }
+      ]
+    },
+    {
+      "name": "@import",
+      "description": "Import styles or Tailwind CSS plugins",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#import"
+        }
+      ]
+    },
+    {
+      "name": "@reference",
+      "description": "Reference external styles in Tailwind CSS",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/reference"
+        }
+      ]
+    },
+    {
+      "name": "@source",
+      "description": "Specify where Tailwind CSS should look for classes",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/source-directive"
+        }
+      ]
+    }
+  ]
+}
