@@ -5,6 +5,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Chatbot } from "@/components/Chatbot";
+import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 
 /**
  * Import images
@@ -28,10 +30,7 @@ const PHOTOS = Object.entries(galerieModules)
 
     return Number(bNum || 0) - Number(aNum || 0); // 🔥 INVERSE ORDER (dernier → premier)
   })
-  .map(([, src], index) => ({
-    src,
-    label: `Galerie ${index + 1}`,
-  }));
+  .map(([, src]) => ({ src }));
 
 /**
  * Animations Framer Motion
@@ -57,21 +56,25 @@ const item = {
 };
 
 export const Route = createFileRoute("/galerie")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("gallery");
+    return {
     meta: [
-      { title: "Galerie — Clinique Nefertiti" },
-      {
-        name: "description",
-        content:
-          "Découvrez les espaces médicaux modernes et équipements de la clinique Nefertiti.",
-      },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/galerie") },
       { property: "og:image", content: PHOTOS[0]?.src },
     ],
-  }),
+    links: [{ rel: "canonical", href: canonicalUrl("/galerie") }],
+    };
+  },
   component: GaleriePage,
 });
 
 function GaleriePage() {
+  const { t } = useI18n();
   return (
     <div className="bg-blanc text-charbon min-h-screen">
       <SiteHeader />
@@ -81,15 +84,15 @@ function GaleriePage() {
           {/* HEADER */}
           <div className="mb-14">
             <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase">
-              Galerie
+              {t("gallery.eyebrow")}
             </span>
 
             <h1 className="font-display text-5xl md:text-7xl mt-4 mb-6 leading-[0.95]">
-              La Clinique en Images
+              {t("gallery.title")}
             </h1>
 
             <p className="max-w-2xl text-charbon/70">
-              Un environnement médical moderne pensé pour la précision et le confort.
+              {t("gallery.text")}
             </p>
           </div>
 
@@ -100,15 +103,17 @@ function GaleriePage() {
             animate="show"
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
-            {PHOTOS.map((photo, i) => (
-              <motion.figure
+            {PHOTOS.map((photo, i) => {
+              const translatedLabel = t("gallery.photo").replace("{index}", String(i + 1));
+              return (
+                <motion.figure
                 key={i}
                 variants={item}
                 className="group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/5]"
               >
                 <motion.img
                   src={photo.src}
-                  alt={photo.label}
+                  alt={translatedLabel}
                   loading="lazy"
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.4 }}
@@ -119,10 +124,11 @@ function GaleriePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-charbon/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <figcaption className="absolute bottom-0 w-full px-4 py-3 text-[10px] font-mono uppercase tracking-widest text-blanc opacity-0 group-hover:opacity-100 transition-opacity">
-                  {photo.label}
+                  {translatedLabel}
                 </figcaption>
               </motion.figure>
-            ))}
+              );
+            })}
           </motion.div>
         </section>
       </main>

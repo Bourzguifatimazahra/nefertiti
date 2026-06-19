@@ -67,155 +67,198 @@ import { MapSection } from "@/components/MapSection";
 import { BeforeAfterCarousel } from "@/components/BeforeAfterCarousel";
 import { useI18n } from "@/lib/i18n";
 import { POSTS, localizedPost } from "@/lib/blog-posts";
+import { canonicalUrl, getSeoCopy, seoConfig } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
+  head: () => {
+    const seo = getSeoCopy();
+    return {
     meta: [
-      { title: "Nefertiti Aesthetic Clinic | Médecine Esthétique & Lasers Médicaux" },
-      {
-        name: "description",
-        content:
-          "Clinique de médecine esthétique dirigée par Dr Iman Mahmoud Abdelaal. Injections, lasers médicaux, PRP, exosomes, harmonisation faciale et médecine régénérative.",
-      },
-      { property: "og:title", content: "Nefertiti Aesthetic Clinic" },
-      {
-        property: "og:description",
-        content: "L'Art Médical de l'Harmonisation du Visage.",
-      },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: heroDoctor },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/") },
+      { property: "og:image", content: canonicalUrl(seoConfig.ogImageUrl) },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: seo.ogTitle },
+      { name: "twitter:description", content: seo.ogDescription },
+      { name: "twitter:image", content: canonicalUrl(seoConfig.ogImageUrl) },
     ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
+    links: [{ rel: "canonical", href: canonicalUrl("/") }],
+    };
+  },
   component: HomePage,
 });
 
 interface Expertise {
   title: string;
+  titleKey?: string;
   treatments: string;
+  treatmentsKey?: string;
   dept: string;
   deptAlt: string;
+  deptAltKey?: string;
   equip: string;
   equipAlt: string;
+  equipAltKey?: string;
   href: string;
 }
 
 const EXPERTISES: Expertise[] = [
   {
     title: "Harmonisation Faciale",
+    titleKey: "dept.injections.title",
     treatments: "Botox · Acide Hyaluronique · Lips · Jawline · Full Face · Skinboosters",
+    treatmentsKey: "index.expertise.injections.treatments",
     dept: deptInjections,
     deptAlt: "Salle d'injections de la clinique Nefertiti",
+    deptAltKey: "injections.page.deptAlt",
     equip: equipInjections,
     equipAlt: "Produits d'injection et harmonisation faciale",
+    equipAltKey: "injections.page.equipAlt",
     href: "/injections-acide-hyaluronique",
   },
   {
     title: "Qualité de Peau",
+    titleKey: "dept.skin.title",
     treatments: "Skinboosters · PRP · Peelings · Mésothérapie",
+    treatmentsKey: "index.expertise.skin.treatments",
     dept: deptSkin,
     deptAlt: "Salle de traitement skinboosters",
+    deptAltKey: "skinboosters.page.deptAlt",
     equip: equipSkin,
     equipAlt: "Sérums et flacons de mésothérapie",
+    equipAltKey: "skinboosters.page.equipAlt",
     href: "/skinboosters",
   },
   {
     title: "Lasers Médicaux",
+    titleKey: "dept.laser.title",
     treatments: "Fotona · Rajeunissement · Fractionné · Pigmentation · Cicatrices",
+    treatmentsKey: "index.expertise.laser.treatments",
     dept: deptLaser,
     deptAlt: "Salle laser Fotona",
+    deptAltKey: "laser.page.deptAlt",
     equip: equipLaser,
     equipAlt: "Pièce à main du laser médical",
+    equipAltKey: "laser.page.equipAlt",
     href: "/laser-fotona",
   },
   {
     title: "Anti-Âge",
+    titleKey: "dept.antiage.title",
     treatments: "Biostimulateurs · Collagène · Prévention du vieillissement",
+    treatmentsKey: "index.expertise.antiage.treatments",
     dept: deptAntiage,
     deptAlt: "Salle de consultation anti-âge",
+    deptAltKey: "dept.deptAlt",
     equip: equipAntiage,
     equipAlt: "Flacons de biostimulateurs de collagène",
+    equipAltKey: "dept.equipAlt",
     href: "/biostimulators",
   },
   {
     title: "Médecine Régénérative",
+    titleKey: "dept.regen.title",
     treatments: "PRP · Exosomes · Secretome · Cellules souches · Médecine régénérative",
+    treatmentsKey: "index.expertise.regen.treatments",
     dept: deptRegen,
     deptAlt: "Laboratoire de médecine régénérative",
+    deptAltKey: "prp.page.deptAlt",
     equip: equipRegen,
     equipAlt: "Tubes d'exosomes et PRP",
+    equipAltKey: "prp.page.equipAlt",
     href: "/prp",
   },
   {
     title: "Corps",
+    titleKey: "dept.body.title",
     treatments: "Cryolipolyse · Radiofréquence · HIFU · Raffermissement corporel",
+    treatmentsKey: "index.expertise.body.treatments",
     dept: deptBody,
     deptAlt: "Salle dédiée au body contouring",
+    deptAltKey: "body.page.deptAlt",
     equip: equipBody,
     equipAlt: "Appareil de cryolipolyse",
+    equipAltKey: "body.page.equipAlt",
     href: "/body-contouring",
   },
 ];
 
 interface TechCard {
   name: string;
+  nameKey?: string;
   description: string;
+  descriptionKey?: string;
   icon: string;
 }
 
 const TECH_CARDS: TechCard[] = [
   {
     name: "Fotona",
+    nameKey: "index.tech.fotona.name",
     description: "Laser 4D pour le rajeunissement global du visage et le resurfacing cutané.",
+    descriptionKey: "index.tech.fotona.description",
     icon: "✦",
   },
   {
     name: "HIFU",
+    nameKey: "index.tech.hifu.name",
     description: "Ultrasons focalisés pour un lifting non-invasif et un tightening profond.",
+    descriptionKey: "index.tech.hifu.description",
     icon: "◈",
   },
   {
     name: "Nanopore",
+    nameKey: "index.tech.nanopore.name",
     description:
       "Microneedling avancé pour la régénération cutanée et l'absorption de principes actifs.",
+    descriptionKey: "index.tech.nanopore.description",
     icon: "⬡",
   },
   {
     name: "PRP",
+    nameKey: "index.tech.prp.name",
     description: "Plasma riche en plaquettes pour la régénération cellulaire naturelle.",
+    descriptionKey: "index.tech.prp.description",
     icon: "◎",
   },
   {
     name: "Exosomes",
+    nameKey: "index.tech.exosomes.name",
     description: "Vésicules cellulaires régénérantes — la révolution de la médecine esthétique.",
+    descriptionKey: "index.tech.exosomes.description",
     icon: "◉",
   },
   {
     name: "Radiofréquence",
+    nameKey: "index.tech.rf.name",
     description: "Stimulation thermique du collagène pour un raffermissement cutané durable.",
+    descriptionKey: "index.tech.rf.description",
     icon: "⬢",
   },
 ];
 
 // Before/After data organized by treatment
 const beforeAfterItems = [
-  { before: before1, after: after1, treatment: "Lèvres" },
-  { before: before2, after: after2, treatment: "Jawline" },
-  { before: before3, after: after3, treatment: "Cernes" },
-  { before: before4, after: after4, treatment: "Full Face" },
-  { before: before5, after: after5, treatment: "Cicatrices" },
-  { before: before6, after: after6, treatment: "PRP cheveux" },
-  { before: before7, after: after7, treatment: "Lèvres" },
-  { before: before8, after: after8, treatment: "Jawline" },
-  { before: before9, after: after9, treatment: "Cernes" },
-  { before: before10, after: after10, treatment: "Full Face" },
-  { before: before11, after: after11, treatment: "Cicatrices" },
-  { before: before12, after: after12, treatment: "PRP cheveux" },
-  { before: before13, after: after13, treatment: "Lèvres" },
-  { before: before14, after: after14, treatment: "Jawline" },
-  { before: before15, after: after15, treatment: "Cernes" },
-  { before: before16, after: after16, treatment: "Full Face" },
-  { before: before17, after: after17, treatment: "Cicatrices" },
+  { before: before1, after: after1, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before2, after: after2, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before3, after: after3, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before4, after: after4, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before5, after: after5, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
+  { before: before6, after: after6, treatment: "PRP cheveux", treatmentKey: "beforeafter.treatment.prpHair" },
+  { before: before7, after: after7, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before8, after: after8, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before9, after: after9, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before10, after: after10, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before11, after: after11, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
+  { before: before12, after: after12, treatment: "PRP cheveux", treatmentKey: "beforeafter.treatment.prpHair" },
+  { before: before13, after: after13, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before14, after: after14, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before15, after: after15, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before16, after: after16, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before17, after: after17, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
 ];
 
 // Animation variants
@@ -226,8 +269,8 @@ const fadeInUp = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease }
-  }
+    transition: { duration: 0.7, ease },
+  },
 };
 
 const fadeInLeft = {
@@ -235,8 +278,8 @@ const fadeInLeft = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.8, ease }
-  }
+    transition: { duration: 0.8, ease },
+  },
 };
 
 const fadeInRight = {
@@ -244,8 +287,8 @@ const fadeInRight = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.8, ease }
-  }
+    transition: { duration: 0.8, ease },
+  },
 };
 
 const scaleIn = {
@@ -253,8 +296,8 @@ const scaleIn = {
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.6, ease }
-  }
+    transition: { duration: 0.6, ease },
+  },
 };
 
 const staggerContainer = {
@@ -273,8 +316,8 @@ const slideInLeft = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.9, ease }
-  }
+    transition: { duration: 0.9, ease },
+  },
 };
 
 const slideInRight = {
@@ -282,8 +325,8 @@ const slideInRight = {
   show: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.9, ease }
-  }
+    transition: { duration: 0.9, ease },
+  },
 };
 
 const zoomIn = {
@@ -291,14 +334,21 @@ const zoomIn = {
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.8, ease }
-  }
+    transition: { duration: 0.8, ease },
+  },
 };
 
 function HomePage() {
   const { t, lang } = useI18n();
   const recentPosts = POSTS.slice(0, 3);
-  
+
+  const expertiseTitle = (e: Expertise) => e.titleKey ? t(e.titleKey) : e.title;
+  const expertiseTreatments = (e: Expertise) => e.treatmentsKey ? t(e.treatmentsKey) : e.treatments;
+  const expertiseDeptAlt = (e: Expertise) => e.deptAltKey ? t(e.deptAltKey) : e.deptAlt;
+  const expertiseEquipAlt = (e: Expertise) => e.equipAltKey ? t(e.equipAltKey) : e.equipAlt;
+  const techName = (tech: TechCard) => tech.nameKey ? t(tech.nameKey) : tech.name;
+  const techDescription = (tech: TechCard) => tech.descriptionKey ? t(tech.descriptionKey) : tech.description;
+
   return (
     <div className="bg-blanc text-charbon font-sans overflow-x-hidden">
       <SiteHeader />
@@ -308,19 +358,22 @@ function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative min-h-[100vh] flex items-center overflow-hidden bg-gradient-to-br from-blanc via-blanc/95 to-blanc/90"
+        className="relative min-h-[100vh] flex items-center overflow-hidden bg-blanc"
       >
+        {/* Enhanced lighting effects for medical luxury ambiance */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blanc/80 via-transparent to-blanc/90 z-0" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.05)_100%)] z-0" />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2, repeat: Infinity, repeatType: "reverse" }}
-          className="pointer-events-none absolute -left-32 top-1/4 z-0 h-96 w-96 rounded-full bg-gold/5 blur-3xl"
+          animate={{ opacity: 0.7, scale: 1 }}
+          transition={{ duration: 2, delay: 0.2, repeat: Infinity, repeatType: "reverse" }}
+          className="pointer-events-none absolute -left-40 top-1/3 z-0 h-[28rem] w-[28rem] rounded-full bg-gold/10 blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1.2 }}
-          transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
-          className="pointer-events-none absolute -right-32 bottom-1/4 z-0 h-[30rem] w-[30rem] rounded-full bg-walnut/5 blur-3xl"
+          animate={{ opacity: 0.4, scale: 1.3 }}
+          transition={{ duration: 2.5, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
+          className="pointer-events-none absolute -right-40 bottom-1/3 z-0 h-[32rem] w-[32rem] rounded-full bg-walnut/8 blur-3xl"
         />
 
         <div className="container mx-auto px-6 max-w-7xl grid grid-cols-12 gap-8 items-center relative z-10 py-20">
@@ -338,12 +391,9 @@ function HomePage() {
             </motion.span>
             <motion.h1
               variants={fadeInUp}
-              className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.92] text-balance mb-8"
+              className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.92] text-balance mb-8 text-charbon"
             >
-              {t("hero.title.1")} <br />
-              <span className="italic text-walnut bg-gradient-to-r from-walnut to-gold bg-clip-text text-transparent">
-                {t("hero.title.2")}
-              </span>
+              {t("hero.title")}
             </motion.h1>
             <motion.div
               variants={fadeInUp}
@@ -351,16 +401,32 @@ function HomePage() {
             />
             <motion.p
               variants={fadeInUp}
-              className="max-w-md text-charbon/70 text-lg leading-relaxed mb-10"
+              className="max-w-md text-charbon/70 text-lg leading-relaxed mb-4"
             >
               {t("hero.subtitle")}
             </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="text-charbon/50 text-sm tracking-widest uppercase mb-6"
+            >
+              {t("hero.tagline")}
+            </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="max-w-lg text-charbon/60 leading-relaxed mb-10"
+            >
+              {t("hero.description")}
+            </motion.p>
             <motion.div
               variants={fadeInUp}
-              className="flex flex-wrap gap-4"
+              className="flex items-center gap-3 mb-10"
             >
-              <motion.div 
-                whileHover={{ scale: 1.05 }} 
+              <span className="text-gold font-display text-lg italic">{t("hero.doctor")}</span>
+              <span className="text-charbon/40 text-xs uppercase tracking-widest">{t("hero.doctor.title")}</span>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -371,8 +437,8 @@ function HomePage() {
                   {t("hero.cta.appointment")}
                 </Link>
               </motion.div>
-              <motion.div 
-                whileHover={{ scale: 1.05 }} 
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -387,32 +453,22 @@ function HomePage() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 60, scale: 1.1 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 1.2, ease, delay: 0.3 }}
-          className="absolute top-0 right-0 w-1/2 h-full hidden lg:block"
-        >
+        <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
           <div className="relative w-full h-full">
             <img
               src={heroDoctor}
-              alt="Portrait du Dr. Iman Mahmoud Abdelaal"
+              alt={t("about.name")}
               width={1080}
               height={1600}
               className="w-full h-full object-cover"
             />
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-blanc via-blanc/30 to-transparent"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
+            <div className="absolute inset-0 bg-gradient-to-r from-blanc via-blanc/30 to-transparent" />
           </div>
-        </motion.div>
+        </div>
       </motion.section>
 
       {/* CREDIBILITY SECTION */}
-      <motion.section 
+      <motion.section
         className="bg-charbon py-24 text-blanc relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -420,7 +476,7 @@ function HomePage() {
         transition={{ duration: 0.8 }}
       >
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <motion.div 
+          <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center"
             variants={staggerContainer}
             initial="hidden"
@@ -439,7 +495,7 @@ function HomePage() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <motion.span 
+                <motion.span
                   className="font-display text-5xl md:text-7xl block text-gold mb-3"
                   initial={{ scale: 0.5, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
@@ -458,7 +514,7 @@ function HomePage() {
       </motion.section>
 
       {/* ABOUT SECTION */}
-      <motion.section 
+      <motion.section
         className="py-32 bg-gradient-to-br from-blanc-warm to-blanc relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -467,7 +523,7 @@ function HomePage() {
       >
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
-            <motion.div 
+            <motion.div
               className="relative"
               variants={slideInLeft}
               initial="hidden"
@@ -477,14 +533,14 @@ function HomePage() {
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src={aboutHands}
-                  alt="Portrait du Dr. Iman Mahmoud Abdelaal"
+                  alt={t("about.name")}
                   loading="lazy"
                   width={1024}
                   height={1280}
                   className="aspect-[4/5] object-cover w-full"
                 />
               </div>
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-8 -right-4 md:-right-8 bg-gradient-to-br from-walnut to-gold p-8 text-blanc max-w-[260px] shadow-2xl rounded-lg"
                 initial={{ opacity: 0, x: 40, y: 40, rotate: -3 }}
                 whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
@@ -493,45 +549,47 @@ function HomePage() {
                 whileHover={{ rotate: -1, scale: 1.02 }}
               >
                 <p className="font-display text-xl italic leading-tight">
-                  "La beauté est un équilibre, pas une transformation."
+                  {t("index.about.quote")}
                 </p>
               </motion.div>
             </motion.div>
-            
+
             <motion.div
               variants={slideInRight}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
             >
-              <motion.span 
+              <motion.span
                 className="text-gold font-mono text-[11px] tracking-[0.3em] uppercase block mb-4"
                 variants={fadeInUp}
               >
-                À Propos du Dr. Iman Mahmoud Abdelaal
+                {t("index.about.eyebrow")}
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 className="font-display text-4xl md:text-5xl mb-8 leading-tight"
                 variants={fadeInUp}
               >
-                Une Vision Médicale de l'Esthétique
+                {t("about.title")}
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-charbon/80 leading-relaxed mb-6 text-lg"
                 variants={fadeInUp}
               >
-                Médecin esthétique spécialisée en harmonisation faciale, médecine régénérative et
-                lasers médicaux, Dr. Iman dédie sa pratique à l'excellence clinique.
+                {t("index.about.p1")}
               </motion.p>
-              <motion.p 
-                className="text-charbon/70 leading-relaxed mb-10"
+              <motion.p className="text-charbon/70 leading-relaxed mb-10" variants={fadeInUp}>
+                {t("index.about.p2")}
+              </motion.p>
+
+              <motion.span
+                className="text-gold font-mono text-[11px] uppercase tracking-wider mb-6 block"
                 variants={fadeInUp}
               >
-                Médecin formatrice internationale, elle transmet son expertise aux praticiens à
-                travers des masterclasses dédiées.
-              </motion.p>
-              
-              <motion.ul 
+                {t("index.about.philosophy.tagline")}
+              </motion.span>
+
+              <motion.ul
                 className="space-y-4 font-mono text-[11px] uppercase tracking-wider text-charbon/60 mb-10"
                 variants={staggerContainer}
                 initial="hidden"
@@ -539,18 +597,18 @@ function HomePage() {
                 viewport={{ once: true }}
               >
                 {[
-                  "Médecine Esthétique et Anti-Âge",
-                  "Dermatologie Interventionnelle",
-                  "Lasers Médicaux",
-                  "Micronutrition",
-                  "Médecine Régénérative",
+                  t("index.about.expertise.1"),
+                  t("index.about.expertise.2"),
+                  t("index.about.expertise.3"),
+                  t("index.about.expertise.4"),
+                  t("index.about.expertise.5"),
+                  t("index.about.expertise.6"),
+                  t("index.about.expertise.7"),
+                  t("index.about.expertise.8"),
+                  t("index.about.expertise.9"),
                 ].map((d, idx) => (
-                  <motion.li 
-                    key={d} 
-                    className="flex items-center gap-3"
-                    variants={fadeInLeft}
-                  >
-                    <motion.span 
+                  <motion.li key={d} className="flex items-center gap-3" variants={fadeInLeft}>
+                    <motion.span
                       className="w-8 h-[2px] bg-gradient-to-r from-gold to-transparent"
                       initial={{ width: 0 }}
                       whileInView={{ width: 32 }}
@@ -561,16 +619,13 @@ function HomePage() {
                   </motion.li>
                 ))}
               </motion.ul>
-              
-              <motion.div 
-                whileHover={{ x: 10 }}
-                transition={{ duration: 0.3 }}
-              >
+
+              <motion.div whileHover={{ x: 10 }} transition={{ duration: 0.3 }}>
                 <Link
                   to="/about-dr-iman-abdelaal"
                   className="inline-block text-xs uppercase tracking-[0.25em] border-b-2 border-charbon pb-2 hover:text-gold hover:border-gold transition-colors"
                 >
-                  Découvrir son parcours
+                  {t("index.about.discover")}
                 </Link>
               </motion.div>
             </motion.div>
@@ -606,28 +661,28 @@ function HomePage() {
               >
                 <Link to={e.href} className="group cursor-pointer block">
                   <div className="flex gap-2 mb-6 overflow-hidden rounded-lg">
-                    <motion.div 
+                    <motion.div
                       className="w-1/2 overflow-hidden rounded-l-lg"
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.5 }}
                     >
                       <img
                         src={e.dept}
-                        alt={e.deptAlt}
+                        alt={expertiseDeptAlt(e)}
                         loading="lazy"
                         width={400}
                         height={400}
                         className="w-full aspect-square object-cover"
                       />
                     </motion.div>
-                    <motion.div 
+                    <motion.div
                       className="w-1/2 overflow-hidden rounded-r-lg"
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.5, delay: 0.05 }}
                     >
                       <img
                         src={e.equip}
-                        alt={e.equipAlt}
+                        alt={expertiseEquipAlt(e)}
                         loading="lazy"
                         width={400}
                         height={400}
@@ -635,14 +690,14 @@ function HomePage() {
                       />
                     </motion.div>
                   </div>
-                  <motion.h3 
+                  <motion.h3
                     className="font-display text-2xl mb-3 group-hover:text-gold transition-colors"
                     whileHover={{ x: 5 }}
                   >
-                    {e.title}
+                    {expertiseTitle(e)}
                   </motion.h3>
-                  <p className="text-charbon/60 text-sm leading-relaxed mb-4">{e.treatments}</p>
-                  <motion.span 
+                  <p className="text-charbon/60 text-sm leading-relaxed mb-4">{expertiseTreatments(e)}</p>
+                  <motion.span
                     className="text-[10px] font-mono uppercase tracking-[0.2em] text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
                     whileHover={{ x: 5 }}
                   >
@@ -656,7 +711,7 @@ function HomePage() {
       </section>
 
       {/* PHILOSOPHY SECTION */}
-      <motion.section 
+      <motion.section
         className="py-32 bg-charbon text-blanc relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -671,7 +726,7 @@ function HomePage() {
             <h2 className="font-display text-4xl md:text-5xl">{t("philo.title")}</h2>
             <p className="text-blanc/50 mt-6 max-w-2xl mx-auto">{t("philo.intro")}</p>
           </div>
-          
+
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-blanc/20 rounded-lg overflow-hidden"
             variants={staggerContainer}
@@ -687,15 +742,15 @@ function HomePage() {
               <motion.div
                 key={p.n}
                 variants={scaleIn}
-                whileHover={{ 
+                whileHover={{
                   backgroundColor: "rgba(212, 175, 55, 0.08)",
-                  transition: { duration: 0.3 }
+                  transition: { duration: 0.3 },
                 }}
                 className={`p-12 transition-all duration-300 group ${
                   i < arr.length - 1 ? "md:border-r border-blanc/20" : ""
                 }`}
               >
-                <motion.span 
+                <motion.span
                   className="text-gold/30 font-display text-7xl block mb-8 group-hover:text-gold transition-all duration-300 italic"
                   whileHover={{ scale: 1.05, rotate: 5 }}
                 >
@@ -748,7 +803,7 @@ function HomePage() {
                   className="relative bg-blanc border border-charbon/10 rounded-xl p-8 h-full transition-all duration-500 group-hover:border-gold/40 group-hover:shadow-2xl group-hover:shadow-gold/10"
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="text-gold text-5xl mb-6"
                     whileHover={{ scale: 1.2, rotate: 15 }}
                     transition={{ duration: 0.3 }}
@@ -756,27 +811,27 @@ function HomePage() {
                     {card.icon}
                   </motion.div>
                   <h3 className="font-display text-2xl mb-4 group-hover:text-gold transition-colors duration-300">
-                    {card.name}
+                    {techName(card)}
                   </h3>
-                  <p className="text-charbon/60 text-sm leading-relaxed">{card.description}</p>
-                  
-                  <motion.div 
+                  <p className="text-charbon/60 text-sm leading-relaxed">{techDescription(card)}</p>
+
+                  <motion.div
                     className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-xl"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="absolute top-4 right-4 w-10 h-[2px] bg-gold/30 group-hover:w-14 group-hover:bg-gold transition-all duration-500"
                       whileHover={{ width: 56 }}
                     />
-                    <motion.div 
+                    <motion.div
                       className="absolute top-4 right-4 w-[2px] h-10 bg-gold/30 group-hover:h-14 group-hover:bg-gold transition-all duration-500"
                       whileHover={{ height: 56 }}
                     />
                   </motion.div>
-                  
-                  <motion.div 
+
+                  <motion.div
                     className="mt-8 h-px bg-gradient-to-r from-charbon/10 via-gold/30 to-transparent group-hover:via-gold transition-all duration-500"
                     whileHover={{ scaleX: 1.1 }}
                   />
@@ -795,13 +850,13 @@ function HomePage() {
             <div className="relative overflow-hidden group">
               <img
                 src={technologiesImg}
-                alt="Plateau technique de la clinique Nefertiti"
+                alt={t("index.technologies.imageAlt")}
                 loading="lazy"
                 width={1600}
                 height={900}
                 className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-gradient-to-t from-charbon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
@@ -836,7 +891,7 @@ function HomePage() {
               </Link>
             </motion.div>
           </div>
-          
+
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12"
             variants={staggerContainer}
@@ -871,7 +926,7 @@ function HomePage() {
                       {lp.title}
                     </h3>
                     <p className="text-charbon/70 text-sm leading-relaxed mb-4">{lp.excerpt}</p>
-                    <motion.span 
+                    <motion.span
                       className="text-[10px] font-mono uppercase tracking-widest border-b border-charbon pb-1 group-hover:text-gold group-hover:border-gold inline-block"
                       whileHover={{ x: 5 }}
                     >
@@ -886,7 +941,7 @@ function HomePage() {
       </MotionSection>
 
       {/* TRAINING SECTION - VERSION CORRIGÉE */}
-      <motion.section 
+      <motion.section
         className="py-24 bg-charbon relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -896,7 +951,7 @@ function HomePage() {
         <div className="container mx-auto px-6 max-w-full">
           <div className="bg-gradient-to-br from-charbon/95 to-charbon overflow-hidden flex flex-col lg:flex-row shadow-2xl">
             {/* Photo responsive - sans zoom */}
-            <motion.div 
+            <motion.div
               className="lg:w-1/2 relative"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -906,7 +961,7 @@ function HomePage() {
               <div className="relative w-full h-full min-h-[500px] lg:min-h-[600px] overflow-hidden">
                 <img
                   src={training}
-                  alt="Centre de formation médicale Nefertiti"
+                  alt={t("index.training.imageAlt")}
                   className="w-full h-full object-cover object-center"
                   loading="lazy"
                 />
@@ -914,9 +969,9 @@ function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-charbon/30 via-transparent to-transparent" />
               </div>
             </motion.div>
-            
+
             {/* Contenu texte */}
-            <motion.div 
+            <motion.div
               className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center text-blanc"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -933,33 +988,33 @@ function HomePage() {
               >
                 <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
                 <span className="text-gold font-mono text-[10px] tracking-[0.2em] uppercase">
-                  Excellence Académique
+                  {t("index.train.badge")}
                 </span>
               </motion.div>
-              
-              <motion.h2 
+
+              <motion.h2
                 className="font-display text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight"
                 variants={fadeInUp}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                Centre de Formation <br />
-                <span className="text-gold">Médicale</span>
+                {t("index.train.title")} <br />
+                <span className="text-gold">{t("index.train.goldTitle")}</span>
               </motion.h2>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-blanc/70 mb-8 leading-relaxed text-base md:text-lg"
                 variants={fadeInUp}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                {t("train.text") || "Formation médicale continue de haut niveau, certifiée et reconnue internationalement. Programme complet couvrant les dernières innovations en médecine esthétique."}
+                {t("index.train.text")}
               </motion.p>
-              
+
               {/* Liste des formations */}
-              <motion.ul 
+              <motion.ul
                 className="grid grid-cols-2 gap-3 text-[11px] uppercase tracking-widest text-blanc/70 mb-8"
                 variants={staggerContainer}
                 initial="hidden"
@@ -967,19 +1022,15 @@ function HomePage() {
                 viewport={{ once: true }}
               >
                 {[
-                  "Injections",
-                  "Anatomie faciale",
-                  "Lasers médicaux",
-                  "Médecine régénérative",
-                  "Hands-on pratique",
-                  "Certification"
+                  t("index.train.list.1"),
+                  t("index.train.list.2"),
+                  t("index.train.list.3"),
+                  t("index.train.list.4"),
+                  t("index.train.list.5"),
+                  t("index.train.list.6"),
                 ].map((f, idx) => (
-                  <motion.li 
-                    key={f} 
-                    className="flex items-center gap-2"
-                    variants={fadeInLeft}
-                  >
-                    <motion.span 
+                  <motion.li key={f} className="flex items-center gap-2" variants={fadeInLeft}>
+                    <motion.span
                       className="w-3 h-[2px] bg-gold"
                       initial={{ width: 0 }}
                       whileInView={{ width: 12 }}
@@ -990,19 +1041,19 @@ function HomePage() {
                   </motion.li>
                 ))}
               </motion.ul>
-              
+
               {/* Lien simple */}
               <motion.a
                 href="#"
                 className="self-start text-gold font-mono text-[10px] uppercase tracking-widest flex items-center gap-3 hover:gap-4 transition-all duration-300"
                 whileHover={{ x: 5 }}
               >
-                {t("train.cta") || "Découvrir la formation"} 
+                {t("index.train.cta")}
                 <span className="text-sm">→</span>
               </motion.a>
-              
+
               {/* Statistiques minimales */}
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-3 gap-4 mt-10 pt-6 border-t border-blanc/20"
                 variants={staggerContainer}
                 initial="hidden"
@@ -1010,17 +1061,15 @@ function HomePage() {
                 viewport={{ once: true }}
               >
                 {[
-                  { num: "500+", label: "Médecins formés" },
-                  { num: "15+", label: "Programmes" },
-                  { num: "100%", label: "Satisfaction" }
+                  { num: t("index.train.stat.1.num"), label: t("index.train.stat.1.label") },
+                  { num: t("index.train.stat.2.num"), label: t("index.train.stat.2.label") },
+                  { num: t("index.train.stat.3.num"), label: t("index.train.stat.3.label") },
                 ].map((stat, idx) => (
-                  <motion.div
-                    key={stat.label}
-                    variants={scaleIn}
-                    className="text-center"
-                  >
+                  <motion.div key={stat.label} variants={scaleIn} className="text-center">
                     <div className="font-display text-xl text-gold">{stat.num}</div>
-                    <div className="text-[9px] uppercase tracking-wider text-blanc/40">{stat.label}</div>
+                    <div className="text-[9px] uppercase tracking-wider text-blanc/40">
+                      {stat.label}
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>

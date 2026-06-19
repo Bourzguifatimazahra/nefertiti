@@ -1,9 +1,11 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { useI18n } from "@/lib/i18n";
 
 interface BeforeAfterItem {
   before: string;
   after: string;
   treatment: string;
+  treatmentKey?: string;
 }
 
 interface BeforeAfterCarouselProps {
@@ -11,6 +13,7 @@ interface BeforeAfterCarouselProps {
 }
 
 export function BeforeAfterCarousel({ items }: BeforeAfterCarouselProps) {
+  const { t } = useI18n();
   if (items.length === 0) return null;
 
   // Group items into chunks of 4 for the carousel
@@ -24,13 +27,13 @@ export function BeforeAfterCarousel({ items }: BeforeAfterCarouselProps) {
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="mb-16 max-w-2xl">
           <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-            Résultats
+            {t("beforeafter.eyebrow")}
           </span>
           <h2 className="font-display text-4xl md:text-5xl leading-tight mb-6">
-            Avant / Après
+            {t("beforeafter.title")}
           </h2>
           <p className="text-charbon/70 text-lg leading-relaxed">
-            Des résultats discrets, naturels.
+            {t("beforeafter.text")}
           </p>
         </div>
 
@@ -45,26 +48,29 @@ export function BeforeAfterCarousel({ items }: BeforeAfterCarouselProps) {
             {groupedItems.map((group, groupIndex) => (
               <CarouselItem key={groupIndex} className="basis-full">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {group.map((item, itemIndex) => (
-                    <div key={itemIndex} className="space-y-2">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
-                        <img
-                          src={item.before}
-                          alt="Avant"
-                          loading="lazy"
-                          className="w-full h-full object-cover"
-                        />
+                  {group.map((item, itemIndex) => {
+                    const treatmentLabel = item.treatmentKey ? t(item.treatmentKey) : item.treatment;
+                    return (
+                      <div key={itemIndex} className="space-y-2">
+                        <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+                          <img
+                            src={item.before}
+                            alt={`${t("beforeafter.altBefore")} — ${treatmentLabel}`}
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+                          <img
+                            src={item.after}
+                            alt={`${t("beforeafter.altAfter")} — ${treatmentLabel}`}
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       </div>
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
-                        <img
-                          src={item.after}
-                          alt="Après"
-                          loading="lazy"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </CarouselItem>
             ))}

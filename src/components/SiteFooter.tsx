@@ -14,20 +14,19 @@ export function SiteFooter() {
             <div className="md:col-span-4">
               <img
                 src={logoSrc}
-                alt="Nefertiti Aesthetic Clinic"
+                alt={t("footer.logoAlt")}
                 className="h-20 w-auto mb-6 invert"
                 loading="lazy"
               />
               <p className="text-blanc/40 text-sm max-w-xs leading-relaxed mb-6">
-                L'art médical de l'harmonisation du visage — sous la direction du Dr. Iman Mahmoud
-                Abdelaal.
+                {t("foot.tagline")} — {t("about.name")}.
               </p>
               <div className="flex gap-4">
                 <a
                   href="https://www.instagram.com/dr_iman_abdelaal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Instagram Dr. Iman Abdelaal"
+                  aria-label={t("footer.social.instagram")}
                   className="text-blanc/60 hover:text-gold transition-colors"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -46,17 +45,39 @@ export function SiteFooter() {
                   </svg>
                 </a>
                 <a
-                  href="https://wa.me/212668783931"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="WhatsApp"
-                  className="text-blanc/60 hover:text-gold transition-colors"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                  </svg>
-                </a>
-              </div>
+                   href="https://wa.me/212668783931"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                    aria-label={t("footer.social.whatsapp")}
+                   className="text-blanc/60 hover:text-gold transition-colors"
+                 >
+                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                   </svg>
+                 </a>
+                 <a
+                   href="https://web.facebook.com/imanabdelaalmahmoud?_rdc=1&_rdr"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                    aria-label={t("footer.social.facebook")}
+                   className="text-blanc/60 hover:text-gold transition-colors"
+                 >
+                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.236.195 2.236.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.713l-.443 2.89h-2.27v6.988C18.343 21.128 22 16.991 22 12" />
+                   </svg>
+                 </a>
+                 <a
+                      href="https://www.tiktok.com/@dr_iman_mahmoud_abdelaal"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t("footer.social.tiktok")}
+                      className="text-blanc/60 hover:text-gold transition-colors"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.88 4.88 0 0 1-3.92-4.83c-.49.89-1.11 1.66-1.86 2.31a4.88 4.88 0 0 0 3.92 4.83v3.11c-1.22.03-2.42-.2-3.57-.63v-4.16c-1.22.03-2.42-.2-3.57-.63V9.5a4.88 4.88 0 0 1 3.57-4.83V6.69a4.88 4.88 0 0 0-3.57 4.83v4.16a4.88 4.88 0 0 0 3.57 4.83v3.11c-1.15.43-2.35.63-3.57.63-3.31 0-6-2.69-6-6v-4.16c0-3.31 2.69-6 6-6v4.16c0 1.66.69 3.16 1.86 4.16a4.88 4.88 0 0 0 3.92-4.83V6.69z" />
+                      </svg>
+                    </a>
+               </div>
             </div>
             <div className="md:col-span-5 grid grid-cols-2 gap-8 text-[11px] uppercase tracking-widest">
               <div className="flex flex-col gap-4">
@@ -118,35 +139,35 @@ export function SiteFooter() {
               </span>
               <div className="space-y-3 text-blanc/60 text-sm">
                 <p className="leading-relaxed">
-                  4ème étage, n°05
+                  {t("footer.address.line1")}
                   <br />
-                  47 Rue Othmane Ibn Affane
+                  {t("footer.address.line2")}
                   <br />
-                  Casablanca 20000, Maroc
+                  {t("footer.address.line3")}
                 </p>
                 <a
                   href="tel:+212522336860"
                   className="block text-xl font-display text-blanc hover:text-gold"
                 >
-                  +212 522 33 68 60
+                  {t("contact.phone.display")}
                 </a>
                 <a
                   href="mailto:nefertitiaestheticclinic@gmail.com"
                   className="block hover:text-gold break-all"
                 >
-                  nefertitiaestheticclinic@gmail.com
+                  {t("contact.email.display")}
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-blanc/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-mono text-blanc/30 tracking-widest">
-            <span>© {new Date().getFullYear()} NEFERTITI AESTHETIC CLINIC · CASABLANCA</span>
+            <span>{t("footer.copyrightFull").replace("{year}", String(new Date().getFullYear()))}</span>
             <div className="flex gap-6">
               <Link to="/mentions-legales" className="hover:text-gold">
-                MENTIONS LÉGALES
+                {t("footer.legal.upper")}
               </Link>
               <Link to="/politique-confidentialite" className="hover:text-gold">
-                CONFIDENTIALITÉ
+                {t("footer.privacy.upper")}
               </Link>
             </div>
           </div>

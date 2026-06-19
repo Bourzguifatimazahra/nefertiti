@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { DepartmentPage } from "@/components/DepartmentPage";
 import { BeforeAfterCarousel } from "@/components/BeforeAfterCarousel";
+import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 import dept1 from "@/assets/Régénérative/3.jpeg";
 import dept2 from "@/assets/Régénérative/4.jpeg";
 import dept3 from "@/assets/Régénérative/5.jpeg";
@@ -56,82 +58,88 @@ const equipImages = [equip1, equip2, equip3, equip4, equip5];
 
 // Before/After data organized by treatment
 const beforeAfterItems = [
-  { before: before1, after: after1, treatment: "Lèvres" },
-  { before: before2, after: after2, treatment: "Jawline" },
-  { before: before3, after: after3, treatment: "Cernes" },
-  { before: before4, after: after4, treatment: "Full Face" },
-  { before: before5, after: after5, treatment: "Cicatrices" },
-  { before: before6, after: after6, treatment: "PRP cheveux" },
-  { before: before7, after: after7, treatment: "Lèvres" },
-  { before: before8, after: after8, treatment: "Jawline" },
-  { before: before9, after: after9, treatment: "Cernes" },
-  { before: before10, after: after10, treatment: "Full Face" },
-  { before: before11, after: after11, treatment: "Cicatrices" },
-  { before: before12, after: after12, treatment: "PRP cheveux" },
-  { before: before13, after: after13, treatment: "Lèvres" },
-  { before: before14, after: after14, treatment: "Jawline" },
-  { before: before15, after: after15, treatment: "Cernes" },
-  { before: before16, after: after16, treatment: "Full Face" },
-  { before: before17, after: after17, treatment: "Cicatrices" },
+  { before: before1, after: after1, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before2, after: after2, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before3, after: after3, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before4, after: after4, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before5, after: after5, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
+  { before: before6, after: after6, treatment: "PRP cheveux", treatmentKey: "beforeafter.treatment.prpHair" },
+  { before: before7, after: after7, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before8, after: after8, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before9, after: after9, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before10, after: after10, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before11, after: after11, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
+  { before: before12, after: after12, treatment: "PRP cheveux", treatmentKey: "beforeafter.treatment.prpHair" },
+  { before: before13, after: after13, treatment: "Lèvres", treatmentKey: "beforeafter.treatment.lips" },
+  { before: before14, after: after14, treatment: "Jawline", treatmentKey: "beforeafter.treatment.jawline" },
+  { before: before15, after: after15, treatment: "Cernes", treatmentKey: "beforeafter.treatment.tearTroughs" },
+  { before: before16, after: after16, treatment: "Full Face", treatmentKey: "beforeafter.treatment.fullFace" },
+  { before: before17, after: after17, treatment: "Cicatrices", treatmentKey: "beforeafter.treatment.scars" },
 ];
 
 export const Route = createFileRoute("/prp")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("prp");
+    return {
     meta: [
-      { title: "PRP, Exosomes & Médecine Régénérative | Nefertiti Clinic" },
-      {
-        name: "description",
-        content:
-          "Médecine régénérative : PRP, Exosomes, Secretome, cellules souches. Stimulation cellulaire pour la peau, le visage et les cheveux.",
-      },
-      { property: "og:title", content: "Médecine Régénérative" },
-      { property: "og:url", content: "/prp" },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/prp") },
       { property: "og:image", content: equipImages[0] },
     ],
-    links: [{ rel: "canonical", href: "/prp" }],
-  }),
-  component: () => (
-    <>
-      <SiteHeader />
-      <DepartmentPage
-        eyebrow="Médecine Régénérative"
-        title="PRP & Exosomes"
-        intro="La médecine régénérative active les mécanismes naturels de réparation cellulaire de la peau. Une approche biologique de pointe pour restaurer qualité, densité et éclat."
-        deptImage={deptImages[0]}
-        deptAlt="Laboratoire de médecine régénérative"
-        equipImage={equipImages[0]}
-        equipAlt="Tubes d'exosomes et PRP"
-        deptImages={deptImages}
-        equipImages={equipImages}
-        treatments={[
-          {
-            name: "PRP (Plasma Riche en Plaquettes)",
-            description:
-              "Stimulation de la régénération cutanée et capillaire à partir de votre propre plasma.",
-          },
-          {
-            name: "Exosomes",
-            description:
-              "Vésicules cellulaires hautement régénérantes — la révolution actuelle de la médecine esthétique.",
-          },
-          {
-            name: "Secretome",
-            description: "Cocktail de facteurs de croissance pour une régénération profonde.",
-          },
-          {
-            name: "Cellules Souches",
-            description: "Protocoles avancés pour la régénération tissulaire.",
-          },
-          {
-            name: "PRP Cheveux",
-            description: "Traitement de la chute des cheveux et stimulation de la repousse.",
-          },
-        ]}
-        technologies={["PRP", "Exosomes", "Secretome", "Stem Cells"]}
-      />
-      <BeforeAfterCarousel items={beforeAfterItems} />
-      <SiteFooter />
-      <WhatsAppFloat />
-    </>
-  ),
+    links: [{ rel: "canonical", href: canonicalUrl("/prp") }],
+    };
+  },
+  component: () => {
+    const { t } = useI18n();
+    return (
+      <>
+        <SiteHeader />
+        <DepartmentPage
+          eyebrow={t("prp.page.eyebrow")}
+          title={t("prp.page.title")}
+          intro={t("prp.page.intro")}
+          deptImage={deptImages[0]}
+          deptAlt={t("prp.page.deptAlt")}
+          equipImage={equipImages[0]}
+          equipAlt={t("prp.page.equipAlt")}
+          deptImages={deptImages}
+          equipImages={equipImages}
+          treatments={[
+            {
+              name: t("prp.page.treatments.1.name"),
+              description: t("prp.page.treatments.1.description"),
+            },
+            {
+              name: t("prp.page.treatments.2.name"),
+              description: t("prp.page.treatments.2.description"),
+            },
+            {
+              name: t("prp.page.treatments.3.name"),
+              description: t("prp.page.treatments.3.description"),
+            },
+            {
+              name: t("prp.page.treatments.4.name"),
+              description: t("prp.page.treatments.4.description"),
+            },
+            {
+              name: t("prp.page.treatments.5.name"),
+              description: t("prp.page.treatments.5.description"),
+            },
+          ]}
+          technologies={[
+            t("prp.page.technologies.1"),
+            t("prp.page.technologies.2"),
+            t("prp.page.technologies.3"),
+            t("prp.page.technologies.4"),
+          ]}
+        />
+        <BeforeAfterCarousel items={beforeAfterItems} />
+        <SiteFooter />
+        <WhatsAppFloat />
+      </>
+    );
+  },
 });

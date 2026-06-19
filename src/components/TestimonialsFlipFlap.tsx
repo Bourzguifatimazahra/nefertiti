@@ -1,61 +1,14 @@
 import { useState, useEffect } from "react";
 import * as motion from "motion/react-client";
+import { useI18n } from "@/lib/i18n";
 
-const TESTIMONIALS = [
-  {
-    id: 1,
-    text: "Bonjour Docteur, je vous remercie énormément pour vos conseils et vos mains si douces. J'ai trop apprécié le résultat du soin LOLA et je compte le refaire bientôt.",
-  },
-  {
-    id: 2,
-    text: "Vous êtes le meilleur. Je vous aime plus que tout ❤️❤️❤️❤️❤️.",
-  },
-  {
-    id: 3,
-    text: "Merci beaucoup Docteur, je suis trop satisfaite du laser, j'ai hâte de voir le résultat final.",
-  },
-  {
-    id: 4,
-    text: "Un grand merci Docteure. C'est la troisième séance de laser. Le résultat est meilleur que prévu. Merci Docteure. Docteure, pour le Fotona, qu'est-ce que vous recommandez pour les rides ?",
-  },
-  {
-    id: 5,
-    text: "Docteure, franchement, le Botox est génial. Déjà, il a fait disparaître mes rides, et en même temps mon visage est resté naturel. C'est un résultat naturel.",
-  },
-  {
-    id: 6,
-    text: "Bonjour Docteure, merci infiniment pour la technique médicale du laser. Elle m'a donné d'excellents résultats. Je suis très satisfaite, pour une fois pas de rougeurs. Vous êtes la meilleure. Bon continuation, bravo. Chères dames, je vous conseille d'aller chez Dr Imane Abdelal, elle est excellente dans tout le travail et la relation.",
-  },
-  {
-    id: 7,
-    text: "Docteure, merci beaucoup. Tu n'imagines pas à quel point je suis heureuse du résultat. Je souffrais d'un problème de creux sur le côté. Le filler était excellent et rendait naturel.",
-  },
-  {
-    id: 8,
-    text: "Docteure, je suis tellement contente du résultat du Fotona. Mon visage est plus ferme et plus lumineux, sans aucune douleur. Merci pour votre gentillesse et votre professionnalisme.",
-  },
-  {
-    id: 9,
-    text: "J'avais peur des aiguilles mais vous avez été si douce. Le résultat du Botox est incroyable : mes rides ont disparu mais je peux toujours bouger mon visage naturellement. Merci mille fois.",
-  },
-  {
-    id: 10,
-    text: "Le laser a changé ma peau. Je ne m'attendais pas à un tel résultat après une seule séance. Les rougeurs sont parties très vite. Je reviens sans hésiter. Merci Docteure.",
-  },
-  {
-    id: 11,
-    text: "J'ai fait du filler sous les yeux et la différence est spectaculaire. J'ai l'air reposée et plus jeune. On ne voit absolument rien, c'est très naturel. Merci pour votre travail parfait.",
-  },
-  {
-    id: 12,
-    text: "Un immense merci pour le soin LOLA. Ma peau est plus douce, plus hydratée et rayonnante. Vous avez des mains en or. Je le recommande à toutes mes amies.",
-  },
-];
+const TESTIMONIAL_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const ITEMS_PER_PAGE = 3;
-const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / ITEMS_PER_PAGE);
+const TOTAL_PAGES = Math.ceil(TESTIMONIAL_IDS.length / ITEMS_PER_PAGE);
 
 export function TestimonialsFlipFlap() {
+  const { t } = useI18n();
   const [currentPage, setCurrentPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -71,10 +24,10 @@ export function TestimonialsFlipFlap() {
     return () => clearInterval(interval);
   }, []);
 
-  const currentTestimonials = TESTIMONIALS.slice(
+  const currentTestimonials = TESTIMONIAL_IDS.slice(
     currentPage * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-  );
+  ).map((id) => ({ id, text: t(`testimonials.${id}`) }));
 
   return (
     <section className="py-32 bg-blanc-warm overflow-hidden">
@@ -82,13 +35,13 @@ export function TestimonialsFlipFlap() {
         {/* Header */}
         <div className="text-center mb-20">
           <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-            Témoignages
+            {t("testimonials.eyebrow")}
           </span>
           <h2 className="font-display text-5xl md:text-6xl italic mb-6">
-            Ce que disent nos patientes
+            {t("testimonials.title")}
           </h2>
           <p className="text-charbon/60 max-w-2xl mx-auto text-lg leading-relaxed">
-            Des retours authentiques de celles qui nous font confiance pour leur beauté naturelle.
+            {t("testimonials.subtitle")}
           </p>
         </div>
 
@@ -158,7 +111,7 @@ export function TestimonialsFlipFlap() {
                   ? "w-8 h-2 bg-gold"
                   : "w-2 h-2 bg-charbon/20 hover:bg-charbon/40"
               }`}
-              aria-label={`Page ${index + 1} des témoignages`}
+              aria-label={t("testimonials.pageAria")}
             />
           ))}
         </div>

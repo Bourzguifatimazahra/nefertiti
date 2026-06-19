@@ -27,7 +27,7 @@ const LABELS: Record<Lang, { play: string; pause: string; stop: string; unsuppor
 const VOICE_LANG: Record<Lang, string> = { fr: "fr-FR", en: "en-US", ar: "ar-SA" };
 
 export function ArticleTTS({ text }: { text: string }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const l = LABELS[lang];
   const [supported, setSupported] = useState(true);
   const [state, setState] = useState<"idle" | "playing" | "paused">("idle");
@@ -98,7 +98,7 @@ export function ArticleTTS({ text }: { text: string }) {
       transition={{ duration: 0.5 }}
       className="flex items-center gap-3 p-4 bg-blanc-warm border border-gold/30 rounded-sm"
     >
-      <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gold">♪ Audio</span>
+      <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gold">♪ {t("article.audio")}</span>
       {state !== "playing" ? (
         <button
           onClick={play}

@@ -1,10 +1,13 @@
+import { useI18n } from "@/lib/i18n";
+
 export function WhatsAppFloat() {
+  const { t } = useI18n();
   return (
     <a
       href="https://wa.me/212668783931"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contacter sur WhatsApp"
+      aria-label={t("whatsapp.aria")}
       className="fixed bottom-8 right-8 rtl:right-auto rtl:left-8 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-transform"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

@@ -6,35 +6,32 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Chatbot } from "@/components/Chatbot";
 import { POSTS, localizedPost } from "@/lib/blog-posts";
 import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("blog");
+    return {
     meta: [
-      { title: "Blog Médical Esthétique | Nefertiti Clinic Casablanca" },
-      {
-        name: "description",
-        content:
-          "Articles d'autorité par Dr. Iman Mahmoud Abdelaal : injections, lasers, PRP, exosomes, prévention du vieillissement.",
-      },
-      { property: "og:title", content: "Blog — Nefertiti Clinic" },
-      { property: "og:url", content: "/blog" },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/blog") },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
-  }),
+    links: [{ rel: "canonical", href: canonicalUrl("/blog") }],
+    };
+  },
   component: BlogPage,
 });
 
 function BlogPage() {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const labels = {
-    fr: {
-      eyebrow: "Journal",
-      title: "Connaissances Médicales Esthétiques",
-      read: "Lire l'article",
-    },
-    en: { eyebrow: "Journal", title: "Aesthetic Medical Knowledge", read: "Read article" },
-    ar: { eyebrow: "المدونة", title: "معارف طبية تجميلية", read: "اقرأ المقال" },
-  }[lang];
+    eyebrow: t("blog.eyebrow"),
+    title: t("blog.title"),
+    read: t("blog.read"),
+  };
   return (
     <div className="bg-blanc text-charbon">
       <SiteHeader />

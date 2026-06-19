@@ -1,11 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useI18n } from "@/lib/i18n";
 
 export interface DepartmentPageProps {
   eyebrow: string;
+  eyebrowKey?: string;
   title: string;
+  titleKey?: string;
   intro: string;
+  introKey?: string;
   deptImage: string;
   deptAlt: string;
   equipImage: string;
@@ -23,6 +27,7 @@ interface ImageSwitcherProps {
   width: number;
   height: number;
   label: string;
+  t: (key: string) => string;
   showLabel?: boolean;
 }
 
@@ -33,6 +38,7 @@ function ImageSwitcher({
   width,
   height,
   label,
+  t,
   showLabel = true,
 }: ImageSwitcherProps) {
   const [index, setIndex] = useState(0);
@@ -79,7 +85,7 @@ function ImageSwitcher({
               type="button"
               onClick={() => changeImage(-1)}
               className="rounded-full bg-blanc/80 text-charbon px-3 py-1 text-xs font-mono uppercase tracking-widest shadow-sm hover:bg-gold hover:text-blanc"
-              aria-label="Photo précédente"
+              aria-label={t("dept.page.previous")}
             >
               ‹
             </button>
@@ -90,7 +96,7 @@ function ImageSwitcher({
               type="button"
               onClick={() => changeImage(1)}
               className="rounded-full bg-blanc/80 text-charbon px-3 py-1 text-xs font-mono uppercase tracking-widest shadow-sm hover:bg-gold hover:text-blanc"
-              aria-label="Photo suivante"
+              aria-label={t("dept.page.next")}
             >
               ›
             </button>
@@ -119,6 +125,7 @@ export function DepartmentPage({
   treatments,
   technologies,
 }: DepartmentPageProps) {
+  const { t } = useI18n();
   const activeDeptImages = deptImages?.length ? deptImages : [deptImage];
   const activeEquipImages = equipImages?.length ? equipImages : [equipImage];
   return (
@@ -143,6 +150,7 @@ export function DepartmentPage({
                 height={1200}
                 className="w-full aspect-square object-cover rounded-sm"
                 label={deptAlt}
+                t={t}
                 showLabel={false}
               />
             </div>
@@ -156,19 +164,21 @@ export function DepartmentPage({
           <div className="grid md:grid-cols-2 gap-6">
             <ImageSwitcher
               images={activeDeptImages}
-              alt={`Salle de traitement — ${deptAlt}`}
+              alt={deptAlt}
               width={800}
               height={800}
               className="w-full aspect-[4/3] object-cover rounded-sm"
-              label="Salle dédiée — Atmosphère clinique premium"
-            />
+                label={`${t("dept.page.room")} — ${t("dept.page.equipment")}`}
+                t={t}
+              />
             <ImageSwitcher
               images={activeEquipImages}
               alt={equipAlt}
               width={800}
               height={800}
               className="w-full aspect-[4/3] object-cover rounded-sm"
-              label="Matériel médical — Technologies certifiées"
+              label={`${t("dept.page.equipment")} — ${t("dept.page.technologiesUsed")}`}
+              t={t}
             />
           </div>
         </div>
@@ -179,10 +189,10 @@ export function DepartmentPage({
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="mb-16 max-w-2xl">
             <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-              Protocoles
+              {t("dept.page.protocols")}
             </span>
             <h2 className="font-display text-4xl md:text-5xl leading-tight">
-              Nos traitements signature
+              {t("dept.page.treatments")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-12">
@@ -209,7 +219,7 @@ export function DepartmentPage({
         <section className="py-20">
           <div className="container mx-auto px-6 max-w-7xl">
             <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-              Technologies utilisées
+              {t("dept.page.technologiesUsed")}
             </span>
             <div className="flex flex-wrap gap-3">
               {technologies.map((tech) => (
@@ -228,16 +238,15 @@ export function DepartmentPage({
       {/* CTA */}
       <section className="py-24 bg-charbon text-blanc">
         <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h2 className="font-display text-4xl md:text-5xl mb-6">Réservez votre consultation</h2>
+          <h2 className="font-display text-4xl md:text-5xl mb-6">{t("dept.page.cta.title")}</h2>
           <p className="text-blanc/60 mb-10 max-w-xl mx-auto">
-            Une approche personnalisée commence par une consultation médicale approfondie avec le
-            Dr. Iman Mahmoud Abdelaal.
+            {t("dept.page.cta.text")}
           </p>
           <Link
             to="/contact"
             className="inline-block bg-gold text-blanc px-8 py-4 text-[11px] uppercase tracking-[0.25em] hover:bg-walnut transition-colors rounded-full"
           >
-            Prendre rendez-vous
+            {t("dept.page.cta.button")}
           </Link>
         </div>
       </section>

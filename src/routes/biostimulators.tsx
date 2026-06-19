@@ -3,53 +3,62 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { DepartmentPage } from "@/components/DepartmentPage";
+import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 import dept from "@/assets/dept-antiage.jpg";
 import equip from "@/assets/equip-antiage.jpg";
 
 export const Route = createFileRoute("/biostimulators")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("biostimulators");
+    return {
     meta: [
-      { title: "Biostimulateurs & Collagène | Nefertiti Clinic" },
-      {
-        name: "description",
-        content:
-          "Biostimulateurs, stimulation du collagène et protocoles de prévention du vieillissement cutané.",
-      },
-      { property: "og:title", content: "Anti-Âge & Biostimulateurs" },
-      { property: "og:url", content: "/biostimulators" },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/biostimulators") },
       { property: "og:image", content: equip },
     ],
-    links: [{ rel: "canonical", href: "/biostimulators" }],
-  }),
-  component: () => (
-    <>
-      <SiteHeader />
-      <DepartmentPage
-        eyebrow="Anti-Âge"
-        title="Biostimulateurs"
-        intro="Stimuler la production naturelle de collagène pour un effet anti-âge progressif, naturel et durable. Une approche médicale de prévention du vieillissement."
-        deptImage={dept}
-        deptAlt="Salle de consultation anti-âge"
-        equipImage={equip}
-        equipAlt="Flacons de biostimulateurs de collagène"
-        treatments={[
-          {
-            name: "Biostimulateurs Injectables",
-            description: "Stimulation profonde du collagène endogène.",
-          },
-          {
-            name: "Collagen Boosting Protocols",
-            description: "Programmes personnalisés combinant injections, lasers et soins.",
-          },
-          {
-            name: "Prévention du Vieillissement",
-            description: "Stratégies médicales de longévité cutanée.",
-          },
-        ]}
-        technologies={["Sculptra", "Radiesse", "Profhilo"]}
-      />
-      <SiteFooter />
-      <WhatsAppFloat />
-    </>
-  ),
+    links: [{ rel: "canonical", href: canonicalUrl("/biostimulators") }],
+    };
+  },
+  component: () => {
+    const { t } = useI18n();
+    return (
+      <>
+        <SiteHeader />
+        <DepartmentPage
+          eyebrow={t("dept.eyebrow")}
+          title={t("dept.title")}
+          intro={t("dept.intro")}
+          deptImage={dept}
+          deptAlt={t("dept.deptAlt")}
+          equipImage={equip}
+          equipAlt={t("dept.equipAlt")}
+          treatments={[
+            {
+              name: t("dept.treatments.1.name"),
+              description: t("dept.treatments.1.description"),
+            },
+            {
+              name: t("dept.treatments.2.name"),
+              description: t("dept.treatments.2.description"),
+            },
+            {
+              name: t("dept.treatments.3.name"),
+              description: t("dept.treatments.3.description"),
+            },
+          ]}
+          technologies={[
+            t("injections.page.technologies.3"),
+            t("dept.biostimulators.radiesse"),
+            t("dept.biostimulators.profhilo"),
+          ]}
+        />
+        <SiteFooter />
+        <WhatsAppFloat />
+      </>
+    );
+  },
 });

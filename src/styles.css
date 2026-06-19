@@ -4,10 +4,9 @@
 @import "tw-animate-css";
 
 /* THEN Tailwind directives */
-@custom-variant dark (&:is(.dark *));
 @custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
 
-@theme inline {
+@theme {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -80,28 +79,6 @@
   --border: oklch(0.21 0.005 50 / 0.08);
   --input: oklch(0.21 0.005 50 / 0.12);
   --ring: var(--gold);
-}
-
-.dark {
-  --blanc: oklch(0.18 0.005 50);
-  --blanc-warm: oklch(0.22 0.006 55);
-  --charbon: oklch(0.97 0.005 75);
-  --medical-gray: oklch(0.72 0.006 60);
-
-  --background: var(--blanc);
-  --foreground: var(--charbon);
-  --card: var(--blanc-warm);
-  --card-foreground: var(--charbon);
-  --popover: var(--blanc-warm);
-  --popover-foreground: var(--charbon);
-  --primary: var(--gold);
-  --primary-foreground: oklch(0.18 0.005 50);
-  --secondary: var(--blanc-warm);
-  --secondary-foreground: var(--charbon);
-  --muted: var(--blanc-warm);
-  --muted-foreground: var(--medical-gray);
-  --border: oklch(0.97 0.005 75 / 0.1);
-  --input: oklch(0.97 0.005 75 / 0.15);
 }
 
 @keyframes fade-up {

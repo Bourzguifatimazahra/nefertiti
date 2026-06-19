@@ -1,112 +1,90 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 
 export const Route = createFileRoute("/politique-confidentialite")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("privacy");
+    return {
     meta: [
-      { title: "Politique de confidentialité (CNDP) | Nefertiti Aesthetic Clinic" },
-      {
-        name: "description",
-        content:
-          "Politique de protection des données personnelles conforme à la loi 09-08 et aux recommandations de la CNDP.",
-      },
-      { property: "og:title", content: "Politique de confidentialité — Nefertiti" },
-      { property: "og:url", content: "/politique-confidentialite" },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/politique-confidentialite") },
     ],
-    links: [{ rel: "canonical", href: "/politique-confidentialite" }],
-  }),
+    links: [{ rel: "canonical", href: canonicalUrl("/politique-confidentialite") }],
+    };
+  },
   component: Page,
 });
 
 function Page() {
+  const { t } = useI18n();
   return (
     <div className="bg-blanc text-charbon">
       <SiteHeader />
       <main className="py-20">
         <article className="container mx-auto px-6 max-w-3xl">
           <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-            CNDP · Loi 09-08
+            {t("privacy.page.eyebrow")}
           </span>
-          <h1 className="font-display text-5xl md:text-6xl mb-10">Politique de confidentialité</h1>
+          <h1 className="font-display text-5xl md:text-6xl mb-10">{t("privacy.page.title")}</h1>
 
           <p className="text-charbon/80 leading-relaxed mb-8">
-            La présente politique décrit la manière dont Nefertiti Aesthetic Clinic, dirigée par Dr.
-            Iman Mahmoud Abdelaal, collecte et traite vos données personnelles, conformément à la{" "}
-            <strong>loi marocaine n°09-08</strong> relative à la protection des personnes physiques
-            à l'égard du traitement des données à caractère personnel et aux recommandations de la{" "}
-            <strong>CNDP</strong>.
+            {t("privacy.page.intro")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">1. Responsable du traitement</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s1.title")}</h2>
           <p className="text-charbon/80">
-            Nefertiti Aesthetic Clinic — 4ème étage, n°05, 47 Rue Othmane Ibn Affane, Casablanca
-            20000. Contact : nefertitiaestheticclinic@gmail.com — +212 522 33 68 60.
+            {t("privacy.page.s1.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">2. Données collectées</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s2.title")}</h2>
           <ul className="list-disc pl-6 text-charbon/80 space-y-1">
-            <li>Identité : nom, prénom.</li>
-            <li>Coordonnées : email, téléphone.</li>
-            <li>Contenu de votre demande (formulaire / WhatsApp / chatbot).</li>
-            <li>Données médicales communiquées uniquement en consultation, jamais via le site.</li>
+            <li>{t("privacy.page.s2.item.1")}</li>
+            <li>{t("privacy.page.s2.item.2")}</li>
+            <li>{t("privacy.page.s2.item.3")}</li>
+            <li>{t("privacy.page.s2.item.4")}</li>
           </ul>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">3. Finalités</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s3.title")}</h2>
           <ul className="list-disc pl-6 text-charbon/80 space-y-1">
-            <li>Répondre à vos demandes de rendez-vous ou d'information.</li>
-            <li>Assurer le suivi médical et administratif des patients.</li>
-            <li>Respecter nos obligations légales et déontologiques.</li>
+            <li>{t("privacy.page.s3.item.1")}</li>
+            <li>{t("privacy.page.s3.item.2")}</li>
+            <li>{t("privacy.page.s3.item.3")}</li>
           </ul>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">4. Base légale</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s4.title")}</h2>
           <p className="text-charbon/80">
-            Consentement explicite recueilli via case à cocher sur les formulaires, et exécution de
-            la relation médicale.
+            {t("privacy.page.s4.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">5. Destinataires</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s5.title")}</h2>
           <p className="text-charbon/80">
-            Les données sont strictement réservées à l'équipe de Nefertiti Aesthetic Clinic. Aucune
-            donnée n'est cédée à des tiers à des fins commerciales.
+            {t("privacy.page.s5.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">6. Durée de conservation</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s6.title")}</h2>
           <p className="text-charbon/80">
-            Formulaires de contact : 12 mois. Dossiers médicaux : durée légale prévue par la
-            réglementation marocaine.
+            {t("privacy.page.s6.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">7. Vos droits</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s7.title")}</h2>
           <p className="text-charbon/80 leading-relaxed">
-            Conformément à la loi 09-08, vous disposez d'un droit d'accès, de rectification,
-            d'opposition et de suppression de vos données. Vous pouvez exercer ces droits par email
-            à{" "}
-            <a href="mailto:nefertitiaestheticclinic@gmail.com" className="text-gold underline">
-              nefertitiaestheticclinic@gmail.com
-            </a>
-            . Vous pouvez également introduire une réclamation auprès de la CNDP —{" "}
-            <a
-              href="https://www.cndp.ma"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline"
-            >
-              www.cndp.ma
-            </a>
-            .
+            {t("privacy.page.s7.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">8. Cookies</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s8.title")}</h2>
           <p className="text-charbon/80">
-            Le site n'utilise que des cookies techniques nécessaires à son fonctionnement. Aucun
-            cookie publicitaire ou de profilage n'est déposé sans votre consentement préalable.
+            {t("privacy.page.s8.content")}
           </p>
 
-          <h2 className="font-display text-2xl mt-8 mb-3">9. Sécurité</h2>
+          <h2 className="font-display text-2xl mt-8 mb-3">{t("privacy.page.s9.title")}</h2>
           <p className="text-charbon/80">
-            Les données sont hébergées sur une infrastructure sécurisée (chiffrement HTTPS) et
-            l'accès est restreint au personnel autorisé.
+            {t("privacy.page.s9.content")}
           </p>
         </article>
       </main>

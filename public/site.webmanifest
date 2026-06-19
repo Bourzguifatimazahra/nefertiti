@@ -1,0 +1,18 @@
+{
+  "name": "Nefertiti Aesthetic Clinic",
+  "short_name": "Nefertiti",
+  "description": "FR : médecine esthétique, injections, lasers médicaux, PRP, exosomes et harmonisation faciale à Casablanca. | EN: aesthetic medicine, injectables, medical lasers, PRP, exosomes and facial harmony in Casablanca. | AR: طب تجميل، حقن، ليزر طبي، PRP، إكسوسومات وتناسق الوجه في الدار البيضاء.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

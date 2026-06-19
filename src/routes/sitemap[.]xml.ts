@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { getSiteUrl } from "@/lib/seo";
 
-const BASE_URL = "";
+const BASE_URL = getSiteUrl();
 
 const ROUTES: { path: string; priority?: string; changefreq?: "weekly" | "monthly" }[] = [
   { path: "/", priority: "1.0", changefreq: "weekly" },

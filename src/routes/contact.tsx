@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -7,21 +6,22 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Chatbot } from "@/components/Chatbot";
 import { useI18n } from "@/lib/i18n";
 import { sanitizeInput } from "@/lib/sanitize";
+import { canonicalUrl, getPageSeoCopy } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
+  head: () => {
+    const seo = getPageSeoCopy("contact");
+    return {
     meta: [
-      { title: "Contact & Rendez-vous | Nefertiti Aesthetic Clinic Casablanca" },
-      {
-        name: "description",
-        content:
-          "Prenez rendez-vous avec Dr. Iman Mahmoud Abdelaal à Casablanca. Téléphone +212 522 33 68 60, WhatsApp, email et plan d'accès.",
-      },
-      { property: "og:title", content: "Contact — Nefertiti Clinic Casablanca" },
-      { property: "og:url", content: "/contact" },
+      { title: seo.title },
+      { name: "description", content: seo.description },
+      { property: "og:title", content: seo.ogTitle },
+      { property: "og:description", content: seo.ogDescription },
+      { property: "og:url", content: canonicalUrl("/contact") },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+    links: [{ rel: "canonical", href: canonicalUrl("/contact") }],
+    };
+  },
   component: ContactPage,
 });
 
@@ -30,44 +30,33 @@ const WHATSAPP_NUMBER = "212668783931";
 
 function ContactPage() {
   const { t } = useI18n();
-  const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     // Sanitize all user inputs to prevent XSS
     const name = sanitizeInput(String(fd.get("name") || ""), 120);
-    const email = sanitizeInput(String(fd.get("email") || ""), 120);
     const phone = sanitizeInput(String(fd.get("phone") || ""), 40);
     const message = sanitizeInput(String(fd.get("message") || ""), 1000);
 
-    if (!name || !email || !phone || !message) return;
-
-    setSubmitting(true);
+    if (!name || !phone || !message) return;
 
     // Construct WhatsApp message with form data
-    const waText = `Demande de rendez-vous - Nefertiti Aesthetic Clinic
-
-Nom: ${name}
-Email: ${email}
-Téléphone: ${phone}
-
-Demande:
+    const waText = `${t("form.whatsappRequest")} - Nefertiti Aesthetic Clinic
+ 
+${t("form.whatsappName")}: ${name}
+${t("form.whatsappPhone")}: ${phone}
+ 
+${t("form.whatsappMessage")}:
 ${message}`;
 
     // Redirect to WhatsApp
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
-    window.open(waUrl, "_blank", "noopener,noreferrer");
-
-    setSubmitting(false);
-    setDone(true);
-    (e.target as HTMLFormElement).reset();
+    window.location.href = waUrl;
   };
 
-  const fields: { name: "name" | "email" | "phone"; type: string; key: string }[] = [
+  const fields: { name: "name" | "phone"; type: string; key: string }[] = [
     { name: "name", type: "text", key: "form.name" },
-    { name: "email", type: "email", key: "form.email" },
     { name: "phone", type: "tel", key: "form.phone" },
   ];
 
@@ -139,22 +128,12 @@ ${message}`;
               </label>
               <motion.button
                 type="submit"
-                disabled={submitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-6 bg-charbon text-blanc px-10 py-4 rounded-full text-xs uppercase tracking-[0.25em] hover:bg-walnut transition-colors disabled:opacity-60"
+                className="mt-6 bg-charbon text-blanc px-10 py-4 rounded-full text-xs uppercase tracking-[0.25em] hover:bg-walnut transition-colors"
               >
-                {submitting ? t("form.sending") : t("form.submit")}
+                {t("form.submit")}
               </motion.button>
-              {done && (
-                <motion.p
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-gold mt-4"
-                >
-                  {t("form.success")}
-                </motion.p>
-              )}
             </form>
 
             <aside className="space-y-10">
@@ -163,11 +142,11 @@ ${message}`;
                   {t("form.address")}
                 </span>
                 <p className="font-display text-2xl leading-snug">
-                  4ème étage, n°05
+                  {t("contact.address.line1")}
                   <br />
-                  47 Rue Othmane Ibn Affane
+                  {t("contact.address.line2")}
                   <br />
-                  Casablanca 20000
+                  {t("contact.address.line3")}
                 </p>
               </div>
               <div>
@@ -175,7 +154,7 @@ ${message}`;
                   {t("form.phoneLabel")}
                 </span>
                 <a href="tel:+212522336860" className="font-display text-3xl hover:text-gold">
-                  +212 522 33 68 60
+                  {t("contact.phone.display")}
                 </a>
               </div>
               <div>
@@ -188,7 +167,7 @@ ${message}`;
                   rel="noopener noreferrer"
                   className="font-display text-3xl hover:text-gold"
                 >
-                  +212 668 78 39 31
+                  {t("contact.whatsapp.display")}
                 </a>
               </div>
               <div>
@@ -199,7 +178,7 @@ ${message}`;
                   href={`mailto:${CLINIC_EMAIL}`}
                   className="font-display text-xl hover:text-gold break-all"
                 >
-                  {CLINIC_EMAIL}
+                  {t("contact.email.display")}
                 </a>
               </div>
               <div>
@@ -212,7 +191,7 @@ ${message}`;
                   rel="noopener noreferrer"
                   className="font-display text-xl hover:text-gold"
                 >
-                  @dr_iman_abdelaal
+                  {t("contact.instagram.display")}
                 </a>
               </div>
               <div>
@@ -225,7 +204,7 @@ ${message}`;
                   rel="noopener noreferrer"
                   className="font-display text-xl hover:text-gold"
                 >
-                  Nefertiti Aesthetic Clinic
+                  {t("contact.linkedin.display")}
                 </a>
               </div>
               <div>
@@ -251,7 +230,7 @@ ${message}`;
           <h2 className="font-display text-3xl md:text-4xl mb-8">{t("form.mapCity")}</h2>
           <div className="aspect-[16/9] w-full overflow-hidden rounded-sm border border-charbon/10 shadow-lg">
             <iframe
-              title="Nefertiti Aesthetic Clinic — Casablanca"
+              title={t("form.mapTitle")}
               src="https://www.google.com/maps?q=47+Rue+Othmane+Ibn+Affane,+Casablanca+20000&output=embed"
               className="w-full h-full border-0"
               loading="lazy"

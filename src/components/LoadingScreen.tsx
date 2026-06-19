@@ -90,7 +90,7 @@ export function LoadingScreen() {
           >
             <motion.img
               src={logoSrc}
-              alt="Nefertiti Aesthetic Clinic"
+              alt={t("loading.logoAlt")}
               className="loading-logo h-24 w-auto md:h-28"
               animate={{
                 filter: [

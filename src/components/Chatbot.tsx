@@ -1,48 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { escapeHtml } from "@/lib/sanitize";
+import { useI18n } from "@/lib/i18n";
 
 interface Msg {
   role: "bot" | "user";
   text: string;
 }
 
-const QUICK = [
-  {
-    q: "Prendre rendez-vous",
-    a: "Vous pouvez réserver au +212 522 33 68 60, sur WhatsApp au 0668 78 39 31 ou via le formulaire de notre page Contact.",
-  },
-  {
-    q: "Adresse de la clinique",
-    a: "4ème étage, n°05, 47 Rue Othmane Ibn Affane, Casablanca 20000.",
-  },
-  { q: "Horaires", a: "Du lundi au samedi de 9h à 19h, sur rendez-vous." },
-  {
-    q: "Tarifs",
-    a: "Les tarifs dépendent du protocole personnalisé. Une consultation médicale est nécessaire pour établir un devis précis.",
-  },
-  {
-    q: "Acide hyaluronique",
-    a: "Nous pratiquons injections de lèvres, jawline, cernes, pommettes et full face avec des produits CE certifiés.",
-  },
-  {
-    q: "PRP / Exosomes",
-    a: "Médecine régénérative pour la peau et les cheveux. Protocole médical réalisé en cabinet par Dr. Iman.",
-  },
-];
-
 export function Chatbot() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "bot", text: "Bonjour, je suis l'assistant Nefertiti. Comment puis-je vous aider ?" },
+    { role: "bot", text: t("chatbot.title") + " — " + t("chatbot.subtitle") },
   ]);
 
+  const quickItems = [
+    { q: t("chatbot.quick.1.q"), a: t("chatbot.quick.1.a") },
+    { q: t("chatbot.quick.2.q"), a: t("chatbot.quick.2.a") },
+    { q: t("chatbot.quick.3.q"), a: t("chatbot.quick.3.a") },
+    { q: t("chatbot.quick.4.q"), a: t("chatbot.quick.4.a") },
+  ];
+
   function ask(q: string) {
-    const found = QUICK.find((x) => x.q === q);
+    const found = quickItems.find((x) => x.q === q);
     // Sanitize the question to prevent XSS
     const sanitizedQ = escapeHtml(q);
     const sanitizedA = found
       ? escapeHtml(found.a)
-      : "Pour une réponse personnalisée, contactez-nous au +212 522 33 68 60.";
+      : t("chatbot.quick.4.a");
     setMessages((m) => [
       ...m,
       { role: "user", text: sanitizedQ },
@@ -54,7 +39,7 @@ export function Chatbot() {
     <>
       <button
         onClick={() => setOpen(!open)}
-        aria-label="Assistant Nefertiti"
+        aria-label={t("chatbot.aria")}
         className="fixed bottom-8 left-8 rtl:left-auto rtl:right-8 z-40 bg-charbon text-blanc p-4 rounded-full shadow-2xl hover:bg-walnut transition-colors"
       >
         <svg
@@ -72,12 +57,12 @@ export function Chatbot() {
         <div className="fixed bottom-28 left-8 rtl:left-auto rtl:right-8 z-50 w-[320px] max-w-[calc(100vw-2rem)] bg-blanc border border-charbon/10 rounded-lg shadow-2xl overflow-hidden animate-fade-up">
           <div className="bg-charbon text-blanc px-5 py-4 flex justify-between items-center">
             <div>
-              <p className="font-display text-lg leading-none">Nefertiti</p>
-              <p className="text-[10px] text-blanc/50 font-mono mt-1">Assistant en ligne</p>
+              <p className="font-display text-lg leading-none">{t("chatbot.title")}</p>
+              <p className="text-[10px] text-blanc/50 font-mono mt-1">{t("chatbot.online")}</p>
             </div>
             <button
               onClick={() => setOpen(false)}
-              aria-label="Fermer"
+              aria-label={t("chatbot.close")}
               className="text-blanc/60 hover:text-gold"
             >
               ✕
@@ -95,7 +80,7 @@ export function Chatbot() {
             ))}
           </div>
           <div className="p-3 border-t border-charbon/10 flex flex-wrap gap-2 bg-blanc">
-            {QUICK.map((x) => (
+            {quickItems.map((x) => (
               <button
                 key={x.q}
                 onClick={() => ask(x.q)}

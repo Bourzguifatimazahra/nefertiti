@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useMemo } from "react";
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -8,6 +8,7 @@ import { Chatbot } from "@/components/Chatbot";
 import { ArticleTTS } from "@/components/ArticleTTS";
 import { POSTS, localizedPost } from "@/lib/blog-posts";
 import { useI18n } from "@/lib/i18n";
+import { canonicalUrl, getLangFromUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/article/$slug")({
   loader: ({ params }) => {
@@ -20,29 +21,31 @@ export const Route = createFileRoute("/article/$slug")({
     };
   },
   head: ({ loaderData }) => {
-    const fr = loaderData?.post.i18n.fr;
+    const lang = getLangFromUrl();
+    const lp = loaderData ? localizedPost(loaderData.post, lang) : null;
+    const canonicalPath = loaderData ? `/article/${loaderData.post.slug}` : "/article";
     return {
-      meta: loaderData
+      meta: loaderData && lp
         ? [
-            { title: `${fr!.title} | Nefertiti Clinic` },
-            { name: "description", content: fr!.excerpt },
-            { property: "og:title", content: fr!.title },
-            { property: "og:description", content: fr!.excerpt },
+            { title: `${lp.title} | Nefertiti Clinic` },
+            { name: "description", content: lp.excerpt },
+            { property: "og:title", content: lp.title },
+            { property: "og:description", content: lp.excerpt },
             { property: "og:type", content: "article" },
-            { property: "og:url", content: `/article/${loaderData.post.slug}` },
+            { property: "og:url", content: canonicalUrl(canonicalPath) },
             { property: "og:image", content: loaderData.post.image },
           ]
         : [],
-      links: loaderData ? [{ rel: "canonical", href: `/article/${loaderData.post.slug}` }] : [],
-      scripts: loaderData
+      links: loaderData ? [{ rel: "canonical", href: canonicalUrl(canonicalPath) }] : [],
+      scripts: loaderData && lp
         ? [
             {
               type: "application/ld+json",
               children: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Article",
-                headline: fr!.title,
-                description: fr!.excerpt,
+                headline: lp.title,
+                description: lp.excerpt,
                 image: loaderData.post.image,
                 author: { "@type": "Person", name: "Dr. Iman Mahmoud Abdelaal" },
                 publisher: {
@@ -60,12 +63,14 @@ export const Route = createFileRoute("/article/$slug")({
 });
 
 function NotFound() {
+  const { t } = useI18n();
+
   return (
     <div className="bg-blanc text-charbon min-h-screen flex items-center justify-center px-4">
       <div className="text-center">
-        <h1 className="font-display text-4xl mb-4">Article introuvable</h1>
+        <h1 className="font-display text-4xl mb-4">{t("article.notFound.title")}</h1>
         <Link to="/blog" className="text-gold underline">
-          Retour au blog
+          {t("article.notFound.text")}
         </Link>
       </div>
     </div>
@@ -80,7 +85,7 @@ const SECTION_LABELS = {
 
 function ArticlePage() {
   const { post, prev, next } = Route.useLoaderData();
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const lp = localizedPost(post, lang);
   const prevLp = localizedPost(prev, lang);
   const nextLp = localizedPost(next, lang);
@@ -89,47 +94,17 @@ function ArticlePage() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25, mass: 0.2 });
 
-  const labels = useMemo(
-    () =>
-      ({
-        fr: {
-          back: "Retour au blog",
-          cta: "Prendre rendez-vous",
-          q: "Une question médicale ?",
-          ctaText:
-            "Dr. Iman Mahmoud Abdelaal vous accueille à Casablanca pour une consultation personnalisée.",
-          toc: "Sommaire",
-          prev: "Article précédent",
-          next: "Article suivant",
-          share: "Partager",
-          by: "Par Dr. Iman Mahmoud Abdelaal",
-        },
-        en: {
-          back: "Back to blog",
-          cta: "Book appointment",
-          q: "A medical question?",
-          ctaText:
-            "Dr. Iman Mahmoud Abdelaal welcomes you in Casablanca for a personalized consultation.",
-          toc: "Contents",
-          prev: "Previous article",
-          next: "Next article",
-          share: "Share",
-          by: "By Dr. Iman Mahmoud Abdelaal",
-        },
-        ar: {
-          back: "العودة إلى المدونة",
-          cta: "احجز موعدًا",
-          q: "سؤال طبي؟",
-          ctaText: "ترحب بك د. إيمان محمود عبد العال في الدار البيضاء لاستشارة مخصصة.",
-          toc: "المحتويات",
-          prev: "المقال السابق",
-          next: "المقال التالي",
-          share: "مشاركة",
-          by: "بقلم د. إيمان محمود عبد العال",
-        },
-      })[lang],
-    [lang],
-  );
+  const labels = {
+    back: t("article.back"),
+    cta: t("about.cta.button"),
+    q: t("blog.page.q"),
+    ctaText: t("article.ctaText"),
+    toc: t("article.toc"),
+    prev: t("article.prev"),
+    next: t("article.next"),
+    share: t("article.share"),
+    by: t("article.by"),
+  };
 
   return (
     <div className="bg-blanc text-charbon">

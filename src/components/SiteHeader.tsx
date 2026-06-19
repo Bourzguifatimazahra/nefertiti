@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import logoSrc from "@/assets/logo.png";
 import { LangSwitcher, useI18n } from "@/lib/i18n";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -40,8 +38,20 @@ export function SiteHeader() {
       }`}
     >
       <div className="px-6 py-3 flex justify-between items-center max-w-7xl mx-auto">
-        <Link to="/" className="flex items-center gap-3">
-          <img src={logoSrc} alt="Nefertiti Aesthetic Clinic" className="h-12 w-auto" />
+        <Link
+          to="/"
+          className="flex items-center gap-3"
+          aria-label={t("header.home.aria")}
+        >
+          <img
+            src="/logo.png"
+            alt={t("header.logoAlt")}
+            className="h-12 w-auto object-contain"
+            width="120"
+            height="120"
+            loading="eager"
+            fetchPriority="high"
+          />
         </Link>
         <div className="hidden lg:flex gap-6 text-[11px] uppercase tracking-[0.2em] font-medium text-charbon/60">
           {NAV.map((n) => (
@@ -51,7 +61,6 @@ export function SiteHeader() {
           ))}
         </div>
         <div className="flex items-center gap-5">
-          <ThemeToggle />
           <div className="hidden md:block">
             <LangSwitcher />
           </div>
@@ -62,7 +71,7 @@ export function SiteHeader() {
             {t("nav.appointment")}
           </Link>
           <button
-            aria-label="Menu"
+            aria-label={t("header.menu")}
             onClick={() => setOpen(!open)}
             className="lg:hidden text-charbon"
           >
