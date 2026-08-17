@@ -23,19 +23,19 @@ import equip7 from "@/assets/Lasers/7.jpeg";
 const deptImages = [dept1, dept2, dept3, dept4, dept5, dept6, dept7];
 const equipImages = [equip1, equip2, equip3, equip4, equip5, equip6, equip7];
 
-export const Route = createFileRoute("/laser-fotona")({
+export const Route = createFileRoute("/salle-laser-technologies-medicales")({
   head: () => {
     const seo = getPageSeoCopy("laser");
     return {
-    meta: [
-      { title: seo.title },
-      { name: "description", content: seo.description },
-      { property: "og:title", content: seo.ogTitle },
-      { property: "og:description", content: seo.ogDescription },
-      { property: "og:url", content: canonicalUrl("/laser-fotona") },
-      { property: "og:image", content: equipImages[0] },
-    ],
-    links: [{ rel: "canonical", href: canonicalUrl("/laser-fotona") }],
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        { property: "og:title", content: seo.ogTitle },
+        { property: "og:description", content: seo.ogDescription },
+        { property: "og:url", content: canonicalUrl("/salle-laser-technologies-medicales") },
+        { property: "og:image", content: equipImages[0] },
+      ],
+      links: [{ rel: "canonical", href: canonicalUrl("/salle-laser-technologies-medicales") }],
     };
   },
   component: () => {
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/laser-fotona")({
         <SiteHeader />
         <DepartmentPage
           eyebrow={t("laser.page.eyebrow")}
-          title={t("laser.page.title")}
+          title={t("dept.salleLaser.title")}
           intro={t("laser.page.intro")}
           deptImage={deptImages[0]}
           deptAlt={t("laser.page.deptAlt")}

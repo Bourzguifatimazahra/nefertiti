@@ -16,10 +16,17 @@ import deptRegen from "@/assets/Régénérative/3.jpeg";
 import equipRegen from "@/assets/Régénérative/3.jpeg";
 import deptBody from "@/assets/Body/1.jpeg";
 import equipBody from "@/assets/Body/3.jpeg";
+import deptFesses1 from "@/assets/Fesses/1.png";
+import deptFesses2 from "@/assets/Fesses/2.png";
+import equipFesses from "@/assets/Fesses/image.png";
 import training from "@/assets/Formation/training.jpg";
 import training5 from "@/assets/Formation/5.jpeg";
 import training6 from "@/assets/Formation/6.jpeg";
 import technologiesImg from "@/assets/technologies.jpg";
+import media1 from "@/assets/media/1.png";
+import media2 from "@/assets/media/2.png";
+import media3 from "@/assets/media/3.png";
+import media4 from "@/assets/media/4.png";
 
 // Before/After images
 import before1 from "@/assets/BEFORE_AFTE/WhatsApp Image 2026-06-12 at 19.01.46 (1).jpeg";
@@ -97,10 +104,10 @@ interface Expertise {
   treatments: string;
   treatmentsKey?: string;
   dept: string;
-  deptAlt: string;
+  deptAlt?: string;
   deptAltKey?: string;
   equip: string;
-  equipAlt: string;
+  equipAlt?: string;
   equipAltKey?: string;
   href: string;
 }
@@ -109,28 +116,15 @@ const EXPERTISES: Expertise[] = [
   {
     title: "Harmonisation Faciale",
     titleKey: "dept.injections.title",
-    treatments: "Botox · Acide Hyaluronique · Lips · Jawline · Full Face · Skinboosters",
+    treatments: "Botox · Acide hyaluronique · Lèvres · Jawline · Full Face · Skinboosters · Rides · Volumes · Profhilo · Hydratation · PRP · Peelings · Mésothérapie",
     treatmentsKey: "index.expertise.injections.treatments",
     dept: deptInjections,
     deptAlt: "Salle d'injections de la clinique Nefertiti",
     deptAltKey: "injections.page.deptAlt",
     equip: equipInjections,
-    equipAlt: "Produits d'injection et harmonisation faciale",
+    equipAlt: "Acide hyaluronique et seringue de précision",
     equipAltKey: "injections.page.equipAlt",
     href: "/injections-acide-hyaluronique",
-  },
-  {
-    title: "Qualité de Peau",
-    titleKey: "dept.skin.title",
-    treatments: "Skinboosters · PRP · Peelings · Mésothérapie",
-    treatmentsKey: "index.expertise.skin.treatments",
-    dept: deptSkin,
-    deptAlt: "Salle de traitement skinboosters",
-    deptAltKey: "skinboosters.page.deptAlt",
-    equip: equipSkin,
-    equipAlt: "Sérums et flacons de mésothérapie",
-    equipAltKey: "skinboosters.page.equipAlt",
-    href: "/skinboosters",
   },
   {
     title: "Lasers Médicaux",
@@ -138,7 +132,7 @@ const EXPERTISES: Expertise[] = [
     treatments: "Fotona · Rajeunissement · Fractionné · Pigmentation · Cicatrices",
     treatmentsKey: "index.expertise.laser.treatments",
     dept: deptLaser,
-    deptAlt: "Salle laser Fotona",
+    deptAlt: "Salle laser Fotona de la clinique Nefertiti",
     deptAltKey: "laser.page.deptAlt",
     equip: equipLaser,
     equipAlt: "Pièce à main du laser médical",
@@ -154,7 +148,7 @@ const EXPERTISES: Expertise[] = [
     deptAlt: "Salle de consultation anti-âge",
     deptAltKey: "dept.deptAlt",
     equip: equipAntiage,
-    equipAlt: "Flacons de biostimulateurs de collagène",
+    equipAlt: "Flacons de biostimulateurs",
     equipAltKey: "dept.equipAlt",
     href: "/biostimulators",
   },
@@ -183,6 +177,19 @@ const EXPERTISES: Expertise[] = [
     equipAlt: "Appareil de cryolipolyse",
     equipAltKey: "body.page.equipAlt",
     href: "/body-contouring",
+  },
+  {
+    title: "Augmentation des Fesses",
+    titleKey: "dept.hyacorp.title",
+    treatments: "Augmentation fessière · Correction de volume · Remodelage fessier · Traitement par Hyacorp",
+    treatmentsKey: "index.expertise.hyacorp.treatments",
+    dept: deptFesses1,
+    deptAlt: "Salle dédiée à l'augmentation des fesses",
+    deptAltKey: "hyacorp.page.deptAlt",
+    equip: deptFesses2,
+    equipAlt: "Acide hyaluronique Hyacorp",
+    equipAltKey: "hyacorp.page.equipAlt",
+    href: "/hyacorp",
   },
 ];
 
@@ -606,6 +613,7 @@ function HomePage() {
                   t("index.about.expertise.7"),
                   t("index.about.expertise.8"),
                   t("index.about.expertise.9"),
+                  t("index.about.expertise.10"),
                 ].map((d, idx) => (
                   <motion.li key={d} className="flex items-center gap-3" variants={fadeInLeft}>
                     <motion.span
@@ -646,7 +654,7 @@ function HomePage() {
           </div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-10"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -656,53 +664,50 @@ function HomePage() {
               <motion.div
                 key={e.title}
                 variants={fadeInUp}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.4 }}
+                className="group"
               >
-                <Link to={e.href} className="group cursor-pointer block">
-                  <div className="flex gap-2 mb-6 overflow-hidden rounded-lg">
-                    <motion.div
-                      className="w-1/2 overflow-hidden rounded-l-lg"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.5 }}
-                    >
+                <Link to={e.href} className="block">
+                  <div className="flex gap-2 mb-5 overflow-hidden rounded-lg">
+                    <div className="w-1/2 overflow-hidden rounded-l-lg">
                       <img
                         src={e.dept}
                         alt={expertiseDeptAlt(e)}
                         loading="lazy"
                         width={400}
                         height={400}
-                        className="w-full aspect-square object-cover"
+                        className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    </motion.div>
-                    <motion.div
-                      className="w-1/2 overflow-hidden rounded-r-lg"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.5, delay: 0.05 }}
-                    >
+                    </div>
+                    <div className="w-1/2 overflow-hidden rounded-r-lg">
                       <img
                         src={e.equip}
                         alt={expertiseEquipAlt(e)}
                         loading="lazy"
                         width={400}
                         height={400}
-                        className="w-full aspect-square object-cover"
+                        className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    </motion.div>
+                    </div>
                   </div>
-                  <motion.h3
-                    className="font-display text-2xl mb-3 group-hover:text-gold transition-colors"
-                    whileHover={{ x: 5 }}
-                  >
-                    {expertiseTitle(e)}
-                  </motion.h3>
-                  <p className="text-charbon/60 text-sm leading-relaxed mb-4">{expertiseTreatments(e)}</p>
-                  <motion.span
-                    className="text-[10px] font-mono uppercase tracking-[0.2em] text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all"
-                    whileHover={{ x: 5 }}
-                  >
-                    {t("exp.discover")} <span className="rtl-flip">→</span>
-                  </motion.span>
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-charbon/50">
+                      {expertiseDeptAlt(e)}
+                    </p>
+                    <p className="text-[11px] text-charbon/60 italic">
+                      {expertiseEquipAlt(e)}
+                    </p>
+                    <h3 className="font-display text-xl group-hover:text-gold transition-colors">
+                      {expertiseTitle(e)}
+                    </h3>
+                    <p className="text-charbon/60 text-sm leading-relaxed">
+                      {expertiseTreatments(e)}
+                    </p>
+                    <div className="flex justify-end pt-2">
+                      <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                        {t("exp.discover")} <span className="rtl-flip">→</span>
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               </motion.div>
             ))}
@@ -939,6 +944,62 @@ function HomePage() {
           </motion.div>
         </div>
       </MotionSection>
+
+      {/* MEDIA SECTION */}
+      <motion.section
+        className="py-24 bg-gradient-to-br from-blanc-warm to-blanc relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-gold font-mono text-[11px] tracking-[0.3em] uppercase block mb-4">
+              {t("media.eyebrow")}
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl mb-4">
+              {t("media.title")}
+            </h2>
+            <p className="text-charbon/60 max-w-2xl mx-auto text-lg leading-relaxed">
+              {t("media.text")}
+            </p>
+          </div>
+
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            {[
+              { src: media1, alt: t("media.photo.1") },
+              { src: media2, alt: t("media.photo.2") },
+              { src: media3, alt: t("media.photo.3") },
+              { src: media4, alt: t("media.photo.4") },
+            ].map((photo, idx) => (
+              <motion.div
+                key={idx}
+                variants={scaleIn}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.4 }}
+                className="group relative overflow-hidden rounded-xl shadow-lg"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  width={400}
+                  height={400}
+                  className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charbon/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* TRAINING SECTION - VERSION CORRIGÉE */}
       <motion.section

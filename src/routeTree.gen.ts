@@ -9,59 +9,73 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SkinboostersRouteImport } from './routes/skinboosters'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PrpRouteImport } from './routes/prp'
-import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as LaserFotonaRouteImport } from './routes/laser-fotona'
-import { Route as IntimateRejuvenationRouteImport } from './routes/intimate-rejuvenation'
-import { Route as InjectionsAcideHyaluroniqueRouteImport } from './routes/injections-acide-hyaluronique'
-import { Route as GalerieRouteImport } from './routes/galerie'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BodyContouringRouteImport } from './routes/body-contouring'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as BiostimulatorsRouteImport } from './routes/biostimulators'
-import { Route as AboutDrImanAbdelaalRouteImport } from './routes/about-dr-iman-abdelaal'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AboutDrImanAbdelaalRouteImport } from './routes/about-dr-iman-abdelaal'
+import { Route as BiostimulatorsRouteImport } from './routes/biostimulators'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BodyContouringRouteImport } from './routes/body-contouring'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as HyacorpRouteImport } from './routes/hyacorp'
+import { Route as InjectionsAcideHyaluroniqueRouteImport } from './routes/injections-acide-hyaluronique'
+import { Route as IntimateRejuvenationRouteImport } from './routes/intimate-rejuvenation'
+import { Route as LaserFotonaRouteImport } from './routes/laser-fotona'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as PrpRouteImport } from './routes/prp'
+import { Route as SalleAmincissementRemodelageCorporelRouteImport } from './routes/salle-amincissement-remodelage-corporel'
+import { Route as SalleInjectionsMedecineEsthetiqueRouteImport } from './routes/salle-injections-medecine-esthetique'
+import { Route as SalleLaserTechnologiesMedicalesRouteImport } from './routes/salle-laser-technologies-medicales'
+import { Route as SalleVitaminotherapieMedecineRegenerativeRouteImport } from './routes/salle-vitaminotherapie-medecine-regenerative'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SkinboostersRouteImport } from './routes/skinboosters'
 import { Route as ArticleSlugRouteImport } from './routes/article.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
-const SkinboostersRoute = SkinboostersRouteImport.update({
-  id: '/skinboosters',
-  path: '/skinboosters',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const AboutDrImanAbdelaalRoute = AboutDrImanAbdelaalRouteImport.update({
+  id: '/about-dr-iman-abdelaal',
+  path: '/about-dr-iman-abdelaal',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrpRoute = PrpRouteImport.update({
-  id: '/prp',
-  path: '/prp',
+const BiostimulatorsRoute = BiostimulatorsRouteImport.update({
+  id: '/biostimulators',
+  path: '/biostimulators',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PolitiqueConfidentialiteRoute =
-  PolitiqueConfidentialiteRouteImport.update({
-    id: '/politique-confidentialite',
-    path: '/politique-confidentialite',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LaserFotonaRoute = LaserFotonaRouteImport.update({
-  id: '/laser-fotona',
-  path: '/laser-fotona',
+const BodyContouringRoute = BodyContouringRouteImport.update({
+  id: '/body-contouring',
+  path: '/body-contouring',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IntimateRejuvenationRoute = IntimateRejuvenationRouteImport.update({
-  id: '/intimate-rejuvenation',
-  path: '/intimate-rejuvenation',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HyacorpRoute = HyacorpRouteImport.update({
+  id: '/hyacorp',
+  path: '/hyacorp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InjectionsAcideHyaluroniqueRoute =
@@ -70,55 +84,75 @@ const InjectionsAcideHyaluroniqueRoute =
     path: '/injections-acide-hyaluronique',
     getParentRoute: () => rootRouteImport,
   } as any)
-const GalerieRoute = GalerieRouteImport.update({
-  id: '/galerie',
-  path: '/galerie',
+const IntimateRejuvenationRoute = IntimateRejuvenationRouteImport.update({
+  id: '/intimate-rejuvenation',
+  path: '/intimate-rejuvenation',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
+const LaserFotonaRoute = LaserFotonaRouteImport.update({
+  id: '/laser-fotona',
+  path: '/laser-fotona',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BodyContouringRoute = BodyContouringRouteImport.update({
-  id: '/body-contouring',
-  path: '/body-contouring',
+const PolitiqueConfidentialiteRoute =
+  PolitiqueConfidentialiteRouteImport.update({
+    id: '/politique-confidentialite',
+    path: '/politique-confidentialite',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PrpRoute = PrpRouteImport.update({
+  id: '/prp',
+  path: '/prp',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const SalleAmincissementRemodelageCorporelRoute =
+  SalleAmincissementRemodelageCorporelRouteImport.update({
+    id: '/salle-amincissement-remodelage-corporel',
+    path: '/salle-amincissement-remodelage-corporel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SalleInjectionsMedecineEsthetiqueRoute =
+  SalleInjectionsMedecineEsthetiqueRouteImport.update({
+    id: '/salle-injections-medecine-esthetique',
+    path: '/salle-injections-medecine-esthetique',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SalleLaserTechnologiesMedicalesRoute =
+  SalleLaserTechnologiesMedicalesRouteImport.update({
+    id: '/salle-laser-technologies-medicales',
+    path: '/salle-laser-technologies-medicales',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SalleVitaminotherapieMedecineRegenerativeRoute =
+  SalleVitaminotherapieMedecineRegenerativeRouteImport.update({
+    id: '/salle-vitaminotherapie-medecine-regenerative',
+    path: '/salle-vitaminotherapie-medecine-regenerative',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BiostimulatorsRoute = BiostimulatorsRouteImport.update({
-  id: '/biostimulators',
-  path: '/biostimulators',
+const SkinboostersRoute = SkinboostersRouteImport.update({
+  id: '/skinboosters',
+  path: '/skinboosters',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutDrImanAbdelaalRoute = AboutDrImanAbdelaalRouteImport.update({
-  id: '/about-dr-iman-abdelaal',
-  path: '/about-dr-iman-abdelaal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ArticleSlugRoute = ArticleSlugRouteImport.update({
+  id: '/article/$slug',
+  path: '/article/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
-} as any)
-const ArticleSlugRoute = ArticleSlugRouteImport.update({
-  id: '/article/$slug',
-  path: '/article/$slug',
-  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -130,12 +164,17 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/galerie': typeof GalerieRoute
+  '/hyacorp': typeof HyacorpRoute
   '/injections-acide-hyaluronique': typeof InjectionsAcideHyaluroniqueRoute
   '/intimate-rejuvenation': typeof IntimateRejuvenationRoute
   '/laser-fotona': typeof LaserFotonaRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/prp': typeof PrpRoute
+  '/salle-amincissement-remodelage-corporel': typeof SalleAmincissementRemodelageCorporelRoute
+  '/salle-injections-medecine-esthetique': typeof SalleInjectionsMedecineEsthetiqueRoute
+  '/salle-laser-technologies-medicales': typeof SalleLaserTechnologiesMedicalesRoute
+  '/salle-vitaminotherapie-medecine-regenerative': typeof SalleVitaminotherapieMedecineRegenerativeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skinboosters': typeof SkinboostersRoute
   '/article/$slug': typeof ArticleSlugRoute
@@ -150,12 +189,17 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/galerie': typeof GalerieRoute
+  '/hyacorp': typeof HyacorpRoute
   '/injections-acide-hyaluronique': typeof InjectionsAcideHyaluroniqueRoute
   '/intimate-rejuvenation': typeof IntimateRejuvenationRoute
   '/laser-fotona': typeof LaserFotonaRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/prp': typeof PrpRoute
+  '/salle-amincissement-remodelage-corporel': typeof SalleAmincissementRemodelageCorporelRoute
+  '/salle-injections-medecine-esthetique': typeof SalleInjectionsMedecineEsthetiqueRoute
+  '/salle-laser-technologies-medicales': typeof SalleLaserTechnologiesMedicalesRoute
+  '/salle-vitaminotherapie-medecine-regenerative': typeof SalleVitaminotherapieMedecineRegenerativeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skinboosters': typeof SkinboostersRoute
   '/article/$slug': typeof ArticleSlugRoute
@@ -171,12 +215,17 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/galerie': typeof GalerieRoute
+  '/hyacorp': typeof HyacorpRoute
   '/injections-acide-hyaluronique': typeof InjectionsAcideHyaluroniqueRoute
   '/intimate-rejuvenation': typeof IntimateRejuvenationRoute
   '/laser-fotona': typeof LaserFotonaRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/prp': typeof PrpRoute
+  '/salle-amincissement-remodelage-corporel': typeof SalleAmincissementRemodelageCorporelRoute
+  '/salle-injections-medecine-esthetique': typeof SalleInjectionsMedecineEsthetiqueRoute
+  '/salle-laser-technologies-medicales': typeof SalleLaserTechnologiesMedicalesRoute
+  '/salle-vitaminotherapie-medecine-regenerative': typeof SalleVitaminotherapieMedecineRegenerativeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skinboosters': typeof SkinboostersRoute
   '/article/$slug': typeof ArticleSlugRoute
@@ -193,12 +242,17 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/galerie'
+    | '/hyacorp'
     | '/injections-acide-hyaluronique'
     | '/intimate-rejuvenation'
     | '/laser-fotona'
     | '/mentions-legales'
     | '/politique-confidentialite'
     | '/prp'
+    | '/salle-amincissement-remodelage-corporel'
+    | '/salle-injections-medecine-esthetique'
+    | '/salle-laser-technologies-medicales'
+    | '/salle-vitaminotherapie-medecine-regenerative'
     | '/sitemap.xml'
     | '/skinboosters'
     | '/article/$slug'
@@ -213,12 +267,17 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/galerie'
+    | '/hyacorp'
     | '/injections-acide-hyaluronique'
     | '/intimate-rejuvenation'
     | '/laser-fotona'
     | '/mentions-legales'
     | '/politique-confidentialite'
     | '/prp'
+    | '/salle-amincissement-remodelage-corporel'
+    | '/salle-injections-medecine-esthetique'
+    | '/salle-laser-technologies-medicales'
+    | '/salle-vitaminotherapie-medecine-regenerative'
     | '/sitemap.xml'
     | '/skinboosters'
     | '/article/$slug'
@@ -233,12 +292,17 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/galerie'
+    | '/hyacorp'
     | '/injections-acide-hyaluronique'
     | '/intimate-rejuvenation'
     | '/laser-fotona'
     | '/mentions-legales'
     | '/politique-confidentialite'
     | '/prp'
+    | '/salle-amincissement-remodelage-corporel'
+    | '/salle-injections-medecine-esthetique'
+    | '/salle-laser-technologies-medicales'
+    | '/salle-vitaminotherapie-medecine-regenerative'
     | '/sitemap.xml'
     | '/skinboosters'
     | '/article/$slug'
@@ -254,12 +318,17 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   GalerieRoute: typeof GalerieRoute
+  HyacorpRoute: typeof HyacorpRoute
   InjectionsAcideHyaluroniqueRoute: typeof InjectionsAcideHyaluroniqueRoute
   IntimateRejuvenationRoute: typeof IntimateRejuvenationRoute
   LaserFotonaRoute: typeof LaserFotonaRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
   PrpRoute: typeof PrpRoute
+  SalleAmincissementRemodelageCorporelRoute: typeof SalleAmincissementRemodelageCorporelRoute
+  SalleInjectionsMedecineEsthetiqueRoute: typeof SalleInjectionsMedecineEsthetiqueRoute
+  SalleLaserTechnologiesMedicalesRoute: typeof SalleLaserTechnologiesMedicalesRoute
+  SalleVitaminotherapieMedecineRegenerativeRoute: typeof SalleVitaminotherapieMedecineRegenerativeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SkinboostersRoute: typeof SkinboostersRoute
   ArticleSlugRoute: typeof ArticleSlugRoute
@@ -267,102 +336,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/skinboosters': {
-      id: '/skinboosters'
-      path: '/skinboosters'
-      fullPath: '/skinboosters'
-      preLoaderRoute: typeof SkinboostersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/prp': {
-      id: '/prp'
-      path: '/prp'
-      fullPath: '/prp'
-      preLoaderRoute: typeof PrpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/politique-confidentialite': {
-      id: '/politique-confidentialite'
-      path: '/politique-confidentialite'
-      fullPath: '/politique-confidentialite'
-      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/laser-fotona': {
-      id: '/laser-fotona'
-      path: '/laser-fotona'
-      fullPath: '/laser-fotona'
-      preLoaderRoute: typeof LaserFotonaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/intimate-rejuvenation': {
-      id: '/intimate-rejuvenation'
-      path: '/intimate-rejuvenation'
-      fullPath: '/intimate-rejuvenation'
-      preLoaderRoute: typeof IntimateRejuvenationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/injections-acide-hyaluronique': {
-      id: '/injections-acide-hyaluronique'
-      path: '/injections-acide-hyaluronique'
-      fullPath: '/injections-acide-hyaluronique'
-      preLoaderRoute: typeof InjectionsAcideHyaluroniqueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/galerie': {
-      id: '/galerie'
-      path: '/galerie'
-      fullPath: '/galerie'
-      preLoaderRoute: typeof GalerieRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/body-contouring': {
-      id: '/body-contouring'
-      path: '/body-contouring'
-      fullPath: '/body-contouring'
-      preLoaderRoute: typeof BodyContouringRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/biostimulators': {
-      id: '/biostimulators'
-      path: '/biostimulators'
-      fullPath: '/biostimulators'
-      preLoaderRoute: typeof BiostimulatorsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about-dr-iman-abdelaal': {
@@ -372,11 +350,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutDrImanAbdelaalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/biostimulators': {
+      id: '/biostimulators'
+      path: '/biostimulators'
+      fullPath: '/biostimulators'
+      preLoaderRoute: typeof BiostimulatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/body-contouring': {
+      id: '/body-contouring'
+      path: '/body-contouring'
+      fullPath: '/body-contouring'
+      preLoaderRoute: typeof BodyContouringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hyacorp': {
+      id: '/hyacorp'
+      path: '/hyacorp'
+      fullPath: '/hyacorp'
+      preLoaderRoute: typeof HyacorpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/injections-acide-hyaluronique': {
+      id: '/injections-acide-hyaluronique'
+      path: '/injections-acide-hyaluronique'
+      fullPath: '/injections-acide-hyaluronique'
+      preLoaderRoute: typeof InjectionsAcideHyaluroniqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intimate-rejuvenation': {
+      id: '/intimate-rejuvenation'
+      path: '/intimate-rejuvenation'
+      fullPath: '/intimate-rejuvenation'
+      preLoaderRoute: typeof IntimateRejuvenationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laser-fotona': {
+      id: '/laser-fotona'
+      path: '/laser-fotona'
+      fullPath: '/laser-fotona'
+      preLoaderRoute: typeof LaserFotonaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politique-confidentialite': {
+      id: '/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prp': {
+      id: '/prp'
+      path: '/prp'
+      fullPath: '/prp'
+      preLoaderRoute: typeof PrpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salle-amincissement-remodelage-corporel': {
+      id: '/salle-amincissement-remodelage-corporel'
+      path: '/salle-amincissement-remodelage-corporel'
+      fullPath: '/salle-amincissement-remodelage-corporel'
+      preLoaderRoute: typeof SalleAmincissementRemodelageCorporelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salle-injections-medecine-esthetique': {
+      id: '/salle-injections-medecine-esthetique'
+      path: '/salle-injections-medecine-esthetique'
+      fullPath: '/salle-injections-medecine-esthetique'
+      preLoaderRoute: typeof SalleInjectionsMedecineEsthetiqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salle-laser-technologies-medicales': {
+      id: '/salle-laser-technologies-medicales'
+      path: '/salle-laser-technologies-medicales'
+      fullPath: '/salle-laser-technologies-medicales'
+      preLoaderRoute: typeof SalleLaserTechnologiesMedicalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salle-vitaminotherapie-medecine-regenerative': {
+      id: '/salle-vitaminotherapie-medecine-regenerative'
+      path: '/salle-vitaminotherapie-medecine-regenerative'
+      fullPath: '/salle-vitaminotherapie-medecine-regenerative'
+      preLoaderRoute: typeof SalleVitaminotherapieMedecineRegenerativeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/skinboosters': {
+      id: '/skinboosters'
+      path: '/skinboosters'
+      fullPath: '/skinboosters'
+      preLoaderRoute: typeof SkinboostersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/article/$slug': {
+      id: '/article/$slug'
+      path: '/article/$slug'
+      fullPath: '/article/$slug'
+      preLoaderRoute: typeof ArticleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -385,13 +496,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
-    }
-    '/article/$slug': {
-      id: '/article/$slug'
-      path: '/article/$slug'
-      fullPath: '/article/$slug'
-      preLoaderRoute: typeof ArticleSlugRouteImport
-      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -415,12 +519,17 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   GalerieRoute: GalerieRoute,
+  HyacorpRoute: HyacorpRoute,
   InjectionsAcideHyaluroniqueRoute: InjectionsAcideHyaluroniqueRoute,
   IntimateRejuvenationRoute: IntimateRejuvenationRoute,
   LaserFotonaRoute: LaserFotonaRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
   PrpRoute: PrpRoute,
+  SalleAmincissementRemodelageCorporelRoute: SalleAmincissementRemodelageCorporelRoute,
+  SalleInjectionsMedecineEsthetiqueRoute: SalleInjectionsMedecineEsthetiqueRoute,
+  SalleLaserTechnologiesMedicalesRoute: SalleLaserTechnologiesMedicalesRoute,
+  SalleVitaminotherapieMedecineRegenerativeRoute: SalleVitaminotherapieMedecineRegenerativeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SkinboostersRoute: SkinboostersRoute,
   ArticleSlugRoute: ArticleSlugRoute,
@@ -428,13 +537,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

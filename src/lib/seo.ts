@@ -12,6 +12,7 @@ export type PageKey =
   | "body"
   | "intimate"
   | "prp"
+  | "hyacorp"
   | "blog"
   | "gallery"
   | "faq"

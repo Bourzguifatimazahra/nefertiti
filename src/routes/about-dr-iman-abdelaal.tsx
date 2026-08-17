@@ -76,6 +76,8 @@ function AboutPage() {
                 t("about.page.expertise.7"),
                 t("about.page.expertise.8"),
                 t("about.page.expertise.9"),
+                t("about.page.expertise.10"),
+                t("about.page.expertise.11"),
               ].map((item, idx) => (
                 <li key={idx} className="flex items-center gap-3">
                   <span className="w-8 h-[2px] bg-gradient-to-r from-gold to-transparent" />
@@ -98,53 +100,6 @@ function AboutPage() {
             <p className="text-charbon/70 leading-relaxed max-w-3xl">
               {t("about.page.philosophy.text")}
             </p>
-          </div>
-        </section>
-
-        <section className="py-24 bg-blanc-warm">
-          <div className="container mx-auto px-6 max-w-7xl">
-            <span className="text-gold font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">
-              {t("about.page.trainings.eyebrow")}
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl mb-16">{t("about.page.trainings.title")}</h2>
-            <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
-              {[
-                {
-                  y: t("about.page.trainings.1.y"),
-                  t: t("about.page.trainings.1.t"),
-                  d: t("about.page.trainings.1.d"),
-                },
-                {
-                  y: t("about.page.trainings.2.y"),
-                  t: t("about.page.trainings.2.t"),
-                  d: t("about.page.trainings.2.d"),
-                },
-                { y: t("about.page.trainings.3.y"), t: t("about.page.trainings.3.t"), d: t("about.page.trainings.3.d") },
-                {
-                  y: t("about.page.trainings.4.y"),
-                  t: t("about.page.trainings.4.t"),
-                  d: t("about.page.trainings.4.d"),
-                },
-                {
-                  y: t("about.page.trainings.5.y"),
-                  t: t("about.page.trainings.5.t"),
-                  d: t("about.page.trainings.5.d"),
-                },
-              ].map((f, i) => (
-                <article key={f.t} className="flex gap-6 border-t border-charbon/10 pt-6">
-                  <span className="font-display text-3xl text-gold italic">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-charbon/40 block mb-2">
-                      {f.y}
-                    </span>
-                    <h3 className="font-display text-2xl mb-2">{f.t}</h3>
-                    <p className="text-charbon/70">{f.d}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 

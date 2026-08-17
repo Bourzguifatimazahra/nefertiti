@@ -78,9 +78,9 @@ function NotFound() {
 }
 
 const SECTION_LABELS = {
-  fr: ["Introduction", "Mécanisme", "Indications", "Protocole & résultats"],
-  en: ["Introduction", "Mechanism", "Indications", "Protocol & results"],
-  ar: ["مقدمة", "آلية العمل", "الاستطبابات", "البروتوكول والنتائج"],
+  fr: ["Introduction", "L'acide hyaluronique", "Durée — Acide hyaluronique", "Avantages — Acide hyaluronique", "Le Botox", "Durée — Botox", "Avantages — Botox", "Comparaison", "Conclusion"],
+  en: ["Introduction", "Hyaluronic Acid", "Duration — Hyaluronic Acid", "Benefits — Hyaluronic Acid", "Botox", "Duration — Botox", "Benefits — Botox", "Comparison", "Conclusion"],
+  ar: ["مقدمة", "حمض الهيالورونيك", "المدة — حمض الهيالورونيك", "الفوائد — حمض الهيالورونيك", "البوتوكس", "المدة — البوتوكس", "الفوائد — البوتوكس", "مقارنة", "خاتمة"],
 };
 
 function PostPage() {
@@ -104,6 +104,7 @@ function PostPage() {
     next: t("article.next"),
     share: t("article.share"),
     by: t("article.by"),
+    faqTitle: t("faq.page.title"),
   };
 
   return (
@@ -222,6 +223,30 @@ function PostPage() {
                   {labels.cta}
                 </Link>
               </motion.div>
+
+              {/* FAQ section for botox vs hyaluronic acid post */}
+              {post.slug === "botox-ou-acide-hyaluronique" && (
+                <motion.section
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                  className="mt-20 pt-16 border-t border-charbon/10"
+                >
+                  <h2 className="font-display text-3xl md:text-4xl mb-10">{labels.faqTitle}</h2>
+                  <div className="space-y-2">
+                    {[1, 2, 3, 4, 5, 6].map((n) => (
+                      <details key={n} className="border-t border-charbon/10 py-6 group" open={n === 1}>
+                        <summary className="font-display text-xl md:text-2xl cursor-pointer list-none flex justify-between items-start gap-6 group-hover:text-gold transition-colors">
+                          <span>{t(`blog.post.botox.faq.q${n}`)}</span>
+                          <span className="text-gold font-mono text-sm shrink-0 mt-2">+</span>
+                        </summary>
+                        <p className="text-charbon/70 leading-relaxed mt-4 max-w-2xl">{t(`blog.post.botox.faq.a${n}`)}</p>
+                      </details>
+                    ))}
+                  </div>
+                </motion.section>
+              )}
             </article>
 
             {/* Sticky TOC sidebar */}
