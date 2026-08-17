@@ -128,7 +128,7 @@ function HyacorpPage() {
           <div className="grid lg:grid-cols-[1fr_220px] gap-12 lg:gap-16">
             <article className="max-w-2xl">
               <div className="mb-12 pb-8 border-b border-charbon/10">
-                <ArticleTTS text={`${t("hyacorp.page.title")}. ${t("hyacorp.page.intro")} ${t("hyacorp.page.what.p1")} ${t("hyacorp.page.what.p2")} ${t("hyacorp.page.indications.item1")} ${t("hyacorp.page.indications.item2")} ${t("hyacorp.page.indications.item3")} ${t("hyacorp.page.indications.item4")} ${t("hyacorp.page.indications.item5")} ${t("hyacorp.page.indications.item6")} ${t("hyacorp.page.procedure.consultation.content")} ${t("hyacorp.page.procedure.preparation.content")} ${t("hyacorp.page.procedure.injection.content")} ${t("hyacorp.page.procedure.aftercare.content")} ${t("hyacorp.page.results.p1")} ${t("hyacorp.page.results.p2")} ${t("hyacorp.page.risks.p1")} ${t("hyacorp.page.risks.p2")} ${t("hyacorp.page.pricing.p1")} ${t("hyacorp.page.pricing.p2")} ${t("hyacorp.page.conclusion.p1")}`} />
+                <ArticleTTS text={`${t("hyacorp.page.title")}. ${t("hyacorp.page.intro")} ${t("hyacorp.page.what.p1")} ${t("hyacorp.page.what.p2")} ${t("hyacorp.page.indications.item1")} ${t("hyacorp.page.indications.item2")} ${t("hyacorp.page.indications.item3")} ${t("hyacorp.page.indications.item4")} ${t("hyacorp.page.indications.item5")} ${t("hyacorp.page.indications.item6")} ${t("hyacorp.page.procedure.consultation.content")} ${t("hyacorp.page.procedure.preparation.content")} ${t("hyacorp.page.procedure.injection.content")} ${t("hyacorp.page.procedure.aftercare.content")} ${t("hyacorp.page.results.p1")} ${t("hyacorp.page.risks.p1")} ${t("hyacorp.page.risks.p2")} ${t("hyacorp.page.pricing.p1")} ${t("hyacorp.page.pricing.p2")} ${t("hyacorp.page.faq.q1")} ${t("hyacorp.page.faq.a1")} ${t("hyacorp.page.faq.q2")} ${t("hyacorp.page.faq.a2")} ${t("hyacorp.page.faq.q3")} ${t("hyacorp.page.faq.a3")} ${t("hyacorp.page.faq.q4")} ${t("hyacorp.page.faq.a4")} ${t("hyacorp.page.conclusion.p1")}`} />
               </div>
 
               <div className="space-y-16">
@@ -269,6 +269,7 @@ function HyacorpPage() {
                   <div className="space-y-6 text-lg md:text-xl leading-[1.75] text-charbon/85">
                     <p className="first-letter:font-display first-letter:text-5xl first-letter:font-normal first-letter:float-start first-letter:me-3 first-letter:mt-1 first-letter:text-gold">{t("hyacorp.page.results.p1")}</p>
                     <p>{t("hyacorp.page.results.p2")}</p>
+                    <p>{t("hyacorp.page.results.p3")}</p>
                   </div>
                 </motion.section>
 
@@ -294,42 +295,18 @@ function HyacorpPage() {
                     {t("hyacorp.page.advantages.title")}
                   </h3>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="border-b-2 border-gold">
-                          <th className="text-left py-4 px-4 font-display text-xl">
-                            {t("hyacorp.page.advantages.table.header")}
-                          </th>
-                          <th className="text-left py-4 px-4 font-display text-xl text-gold">
-                            {t("hyacorp.page.advantages.table.hyacorp")}
-                          </th>
-                          <th className="text-left py-4 px-4 font-display text-xl text-charbon/60">
-                            {t("hyacorp.page.advantages.table.lipofilling")}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[1, 2, 3, 4, 5, 6].map((num) => (
-                          <tr key={num} className="border-b border-charbon/10">
-                            <td className="py-4 px-4 font-medium">
-                              {t(`hyacorp.page.advantages.table.row${num}.label`)}
-                            </td>
-                            <td className="py-4 px-4 text-charbon/80">
-                              {t(`hyacorp.page.advantages.table.row${num}.hyacorp`)}
-                            </td>
-                            <td className="py-4 px-4 text-charbon/60">
-                              {t(`hyacorp.page.advantages.table.row${num}.lipofilling`)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <p className="mt-8 text-charbon/70 italic">
-                    {t("hyacorp.page.advantages.note")}
-                  </p>
+                  <ul className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <li key={num} className="flex items-start gap-4">
+                        <span className="text-gold font-display text-xl italic mt-1">
+                          {String(num).padStart(2, "0")}
+                        </span>
+                        <p className="text-charbon/80 leading-relaxed pt-1">
+                          {t(`hyacorp.page.advantages.item${num}`)}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
                 </motion.section>
 
                 {/* Section 6: Risks */}
@@ -409,7 +386,7 @@ function HyacorpPage() {
                   </h3>
 
                   <div className="space-y-2">
-                    {[1, 2, 3, 4, 5].map((num) => (
+                    {[1, 2, 3, 4].map((num) => (
                       <details
                         key={num}
                         className="border-t border-charbon/10 py-6 group"

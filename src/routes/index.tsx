@@ -1142,6 +1142,59 @@ function HomePage() {
       {/* MAP SECTION */}
       <MapSection />
 
+      {/* FAQ SECTION */}
+      <motion.section
+        className="py-32 bg-gradient-to-br from-blanc-warm to-blanc relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-6 max-w-4xl relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-gold font-mono text-[11px] tracking-[0.3em] uppercase block mb-4">
+              {t("index.faq.eyebrow")}
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl mb-4">
+              {t("index.faq.title")}
+            </h2>
+          </div>
+
+          <div className="space-y-2">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <details
+                key={num}
+                className="border-t border-charbon/10 py-6 group"
+                open={num === 1}
+              >
+                <summary className="font-display text-xl md:text-2xl cursor-pointer list-none flex justify-between items-start gap-6 group-hover:text-gold transition-colors">
+                  <span>{t(`index.faq.q${num}`)}</span>
+                  <span className="text-gold font-mono text-sm shrink-0 mt-2">+</span>
+                </summary>
+                <p className="text-charbon/70 leading-relaxed mt-4 max-w-2xl">
+                  {t(`index.faq.a${num}`)}
+                </p>
+              </details>
+            ))}
+          </div>
+
+          <motion.div
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <Link
+              to="/contact"
+              className="inline-block bg-charbon text-blanc px-8 py-4 rounded-full text-xs uppercase tracking-[0.25em] hover:bg-walnut transition-colors"
+            >
+              {t("index.faq.button")}
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* FINAL CTA */}
       <MotionSection className="py-32 text-center relative overflow-hidden bg-gradient-to-br from-blanc-warm to-blanc">
         <div className="container mx-auto px-6 max-w-3xl relative z-10">
